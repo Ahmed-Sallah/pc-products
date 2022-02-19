@@ -1,1 +1,82 @@
-<p>header works!</p>
+<header>
+  <a [routerLink]="['']" class="logo">
+    <i class="fa-solid fa-desktop"></i>
+    Pc Components</a
+  >
+  <nav class="navigation">
+    <a routerLink="">
+      <i class="fa-solid fa-align-justify"></i> POWERED BY ASUS PC BUILDER</a
+    >
+    <a routerLink="">
+      <i class="fa-solid fa-cloud-arrow-down"></i> WINDOWS 11 DOWNLOAD</a
+    >
+    <a routerLink=""><i class="fa-solid fa-phone"></i> NEED HELP?</a>
+  </nav>
+  <div class="spacer"></div>
+  <i class="fa-regular fa-user fa-3x"></i>
+  <nav class="register">
+    <a routerLink="">Signup</a>
+    <a routerLink="">login</a>
+  </nav>
+</header>
+
+<div class="second-nav">
+  <div class="dropdown-category">
+    <button class="dropbtn-category">
+      <i class="fa-solid fa-align-justify"></i> CATEGORIES
+      <i class="fa-solid fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content-category">
+      <a [routerLink]="['products', 'motherboards']"
+        ><i class="fa-solid fa-arrow-right"></i> Motherboard</a
+      >
+      <a [routerLink]="['products', 'cpu']"
+        ><i class="fa-solid fa-arrow-right"></i> Processor</a
+      >
+      <a [routerLink]="['products', 'ram']"
+        ><i class="fa-solid fa-arrow-right"></i> RAM</a
+      >
+      <a [routerLink]="['products', 'ssd']"
+        ><i class="fa-solid fa-arrow-right"></i> SSD</a
+      >
+      <a [routerLink]="['products', 'hdd']"
+        ><i class="fa-solid fa-arrow-right"></i> HDD</a
+      >
+      <a [routerLink]="['products', 'gpu']"
+        ><i class="fa-solid fa-arrow-right"></i> Graphics Card</a
+      >
+      <a [routerLink]="['products', 'cases']"
+        ><i class="fa-solid fa-arrow-right"></i> Cases</a
+      >
+      <a [routerLink]="['products', 'psu']"
+        ><i class="fa-solid fa-arrow-right"></i> Power Supply</a
+      >
+      <a [routerLink]="['products', 'fans-coolers']"
+        ><i class="fa-solid fa-arrow-right"></i> Fans & Coolers</a
+      >
+      <a [routerLink]="['products', 'monitors']"
+        ><i class="fa-solid fa-arrow-right"></i> Monitors</a
+      >
+      <a [routerLink]="['products', 'accessories']"
+        ><i class="fa-solid fa-arrow-right"></i> Accessories</a
+      >
+    </div>
+  </div>
+  <form class="search-form">
+    <input type="text" class="search-input" placeholder="Search" />
+    <button type="button" class="search-button">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </form>
+  <div class="dropdown-cart">
+    <button class="dropbtn-cart">
+      <i class="fa-solid fa-cart-shopping"></i> My Cart
+      <i class="fa-solid fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content-cart">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>
+</div>
