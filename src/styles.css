@@ -8,6 +8,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;

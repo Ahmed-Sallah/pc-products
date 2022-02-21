@@ -1,5 +1,75 @@
-<ul>
-  <li *ngFor="let product of products">
-    {{ product.name }}
-  </li>
-</ul>
+<div class="container-fluid">
+  <div class="no-products" *ngIf="products?.length < 1">No Products</div>
+  <div class="row" *ngIf="products?.length > 0">
+    <!-- Filter -->
+    <div class="col-md-2">
+      <div class="filter-card">
+        <p class="filter-brand">Brand</p>
+        <div class="checkboxes">
+          <div *ngFor="let brand of brandList; let i = index">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="{{ brand }}"
+              value="{{ brand }}"
+              (change)="onFilterByBrand($event, i)"
+              [checked]="selected === i"
+            />
+            <label class="form-check-label" for="{{ brand }}">{{
+              brand
+            }}</label>
+          </div>
+          <hr />
+          <p class="filter-stock">Stock Status</p>
+          <input
+            type="checkbox"
+            class="form-check-input"
+            value="inStock"
+            (change)="onFilterByStock($event)"
+          />
+          <label class="form-check-label">In Stock</label>
+          <br />
+          <input
+            type="checkbox"
+            class="form-check-input"
+            value="outOfStock"
+            (change)="onFilterByStock($event)"
+          />
+          <label class="form-check-label">Out of Stock</label>
+        </div>
+      </div>
+    </div>
+    <!-- Filter -->
+    <!-- CARDS -->
+    <div class="col-md-10">
+      <div class="row">
+        <div class="search-form">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search"
+            [(ngModel)]="search"
+          />
+        </div>
+        <div
+          class="col-md-4"
+          *ngFor="let product of products | searchFilter: search"
+        >
+          <div class="card">
+            <p class="notInStock" *ngIf="!product.availability">OUT OF STOCK</p>
+            <a (click)="showProduct(product._id)">
+              <img [src]="product.image" class="card-img-top" alt="..." />
+
+              <div class="card-body">
+                <p class="p-name">{{ product.name }}</p>
+                <p class="p-price">{{ product.price }} LE</p>
+              </div>
+            </a>
+            <button class="add-to-cart-button">Add To Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CARDS -->
+  </div>
+</div>

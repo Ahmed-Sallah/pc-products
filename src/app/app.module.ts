@@ -9,6 +9,8 @@ import { ProductsShowComponent } from './products/products-show/products-show.co
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { HomeComponent } from './products/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,10 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsShowComponent,
     ProductDetailsComponent,
     HomeComponent,
-
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule

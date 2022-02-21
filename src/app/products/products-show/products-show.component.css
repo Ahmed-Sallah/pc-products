@@ -1,0 +1,109 @@
+.container-fluid {
+  height: 100vh;
+}
+.search-form {
+  text-align: center;
+  margin-top: 0.5em;
+}
+.search-input {
+  background-color: rgb(49, 47, 47);
+  color: white;
+  width: 40em;
+  height: 2.5em;
+  padding-left: 20px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  border-right: 5px solid #3a6cf4;
+  border-left: 5px solid #3a6cf4;
+}
+
+.card {
+  width: 20em;
+  text-align: center;
+  margin: 2em auto;
+  border: 2px solid;
+  border-radius: 10px;
+  transition: 0.3s;
+  align-items: center;
+}
+.card a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  border: 2px solid #3a6cf4;
+}
+
+.card-img-top {
+  padding: 2em;
+}
+
+.p-name {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.p-price {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.add-to-cart-button {
+  background-color: #3a6cf4;
+  color: white;
+  margin-bottom: 1em;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 2em;
+  transition: 0.3s;
+}
+
+.add-to-cart-button:hover {
+  transform: scale(1.1);
+  background-color: #0044ff;
+}
+
+.no-products {
+  text-align: center;
+  font-size: 3em;
+  font-weight: 900;
+}
+
+.filter-card {
+  border: 2px solid rgb(49, 47, 47);
+  border-radius: 1em;
+  margin: 5em 0em 0em 0em;
+  padding: 10px;
+}
+
+.filter-card hr {
+  padding: 0.1em;
+  color: #3a6cf4;
+}
+
+.filter-brand,
+.filter-stock {
+  margin-bottom: 4px;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.form-check-label {
+  margin-bottom: 8px;
+  margin-left: 5px;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.notInStock {
+  margin-top: 0.3em;
+  padding: 0.3em 1.5em;
+  background-color: rgb(131, 10, 10);
+  color: white;
+  border-radius: 1em;
+}

@@ -24,6 +24,14 @@ app.get('/products/:type', (req, res, next) => {
     })
 })
 
+app.get('/products/:type/:id', (req, res, next) => {
+  const id = req.params.id
+  Component.findById(id)
+    .then((product) => {
+      res.status(200).json({message: 'Product Found', product})
+    })
+})
+
 app.listen(3000, () => {
   console.log('Serving on port 3000')
 })

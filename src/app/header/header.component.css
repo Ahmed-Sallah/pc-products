@@ -119,30 +119,6 @@ header {
   background-color: #0044ff;
 }
 
-.search-input {
-  width: 40em;
-  height: 2.5em;
-  padding-left: 20px;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-}
-
-.search-button {
-  color: white;
-  padding: 9px 20px;
-  background-color: rgb(49, 47, 47);
-  border: none;
-  border-right: 5px solid #3a6cf4;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-.search-button:hover {
-  background-color: rgb(31, 30, 30);
-  border-right: 5px solid #0044ff;
-}
-
 .dropbtn-cart {
   background-color: #3a6cf4;
   color: white;
