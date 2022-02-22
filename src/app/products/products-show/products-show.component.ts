@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from '../product.model';
@@ -14,8 +15,8 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
   newProductArr: any[]
   brandList = new Set<string>()
   private productSub: Subscription
+  private filteredSub: Subscription
   search = ''
-  selected = -1
 
   constructor(private productsService: ProductsService, private route: ActivatedRoute, private router: Router) { }
 
@@ -26,34 +27,41 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
     })
     this.productSub = this.productsService.getProductsUpdateListener()
     .subscribe((products: Product[]) => {
-      this.selected = -1
       this.products = products
       this.brandList.clear()
-      for(let p of products) {
+      for(let p of this.products) {
         this.brandList.add(p.brand)
       }
     })
-    this.productsService.getFilteredProductsListener()
-      .subscribe((products: Product[]) => {
-        this.products = products
-      })
+
+    this.filteredSub = this.productsService.getFilteredProductsListener()
+    .subscribe((products: Product[]) => {
+      this.products = products
+    })
+
   }
 
- showProduct(id: string) {
-  this.router.navigate([id], {relativeTo: this.route})
- }
+  showProduct(id: string) {
+   this.router.navigate([id], {relativeTo: this.route})
+  }
 
- onFilterByBrand($event, i) {
-  this.selected = i
-  this.productsService.filterByBrand($event)
- }
+  onFilter(form: NgForm) {
+    this.productsService.filter(form, this.brandList)
+  }
 
- onFilterByStock($event) {
-  this.productsService.filterByStock($event)
- }
+  onAddToCart(product: Product) {
+    if(!product.availability) {
+      return
+    } else {
+      this.productsService.addToCart(product, 1)
+
+    }
+  }
+
 
   ngOnDestroy(): void {
     this.productSub.unsubscribe()
+    this.filteredSub.unsubscribe()
   }
 
 }

@@ -69,9 +69,26 @@
       <i class="fa-solid fa-caret-down"></i>
     </button>
     <div class="dropdown-content-cart">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <p class="noItemsInCart" *ngIf="items?.length < 1">
+        Your shopping cart is empty!
+      </p>
+      <div class="card" *ngFor="let item of items">
+        <div class="row">
+          <div class="col-6 d-flex align-items-center">
+            <div class="card card-img m-2">
+              <img src="{{ item.image }}" alt="" class="cart-img" />
+            </div>
+          </div>
+          <div class="col-6">
+            <p class="cart-name">{{ item.name }}</p>
+            <p class="cart-qty">X {{ item.qty }}</p>
+            <p class="cart-price">{{ item.price * item.qty }} LE</p>
+            <button class="cart-delete-btn">
+              <i class="fa-regular fa-trash-can"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

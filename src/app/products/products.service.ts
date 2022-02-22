@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { NgForm } from "@angular/forms";
+import { of, Subject } from "rxjs";
 import { Product } from "./product.model";
 
 @Injectable({providedIn: 'root'})
@@ -9,6 +10,9 @@ export class ProductsService {
   private products: Product[] = []
   private productUpdated = new Subject<Product[]>()
   private filteredProducts = new Subject<Product[]>()
+  private cartListener = new Subject<{_id: string, name: string, price: number, qty: number, image: string}[]>()
+  private cartList: {_id: string, name: string, price: number, qty: number, image: string}[] = []
+
   constructor(private http: HttpClient) {}
 
   getProducts(type: string) {
@@ -27,34 +31,109 @@ export class ProductsService {
     return this.http.get<{message: string, product: Product}>('http://localhost:3000/products/' + type + '/' + id)
   }
 
-  filterByBrand($event) {
-    if($event.target.checked) {
-      const filteredProducts: Product[] = this.products.filter(p => p.brand === $event.target.defaultValue)
-      this.filteredProducts.next([...filteredProducts])
-    } else {
-      this.filteredProducts.next([...this.products])
+  filter(form: NgForm, brandList) {
+    let filteredList = []
+    if(filteredList.length === 0) {
+      this.productUpdated.next([...this.products])
     }
-  }
-
-  filterByStock($event) {
-    if($event.target.checked) {
-      let filteredProducts: Product[]
-      if($event.target.defaultValue === 'inStock') {
-        filteredProducts = this.products.filter(p => p.availability === true)
-        console.log(filteredProducts)
-        this.filteredProducts.next([...filteredProducts])
-      } else if($event.target.defaultValue === 'outOfStock') {
-        filteredProducts = this.products.filter(p => p.availability === false)
-        console.log(filteredProducts)
-        this.filteredProducts.next([...filteredProducts])
+    for(let b of brandList) {
+      if(form.controls[b].value === true) {
+        if(form.controls['inStock'].value === true) {
+          if(form.controls['outOfStock'].value === true) {
+            filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
+            this.filteredProducts.next([...filteredList])
+          }
+          filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
+          this.filteredProducts.next([...filteredList])
+        }
+        else if(form.controls['outOfStock'].value === true) {
+          if(form.controls['inStock'].value === true) {
+            filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
+            this.filteredProducts.next([...filteredList])
+          }
+          filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
+          this.filteredProducts.next([...filteredList])
+        }
+        else {
+          filteredList.push(...this.products.filter(p => p.brand === b))
+          this.filteredProducts.next([...filteredList])
+        }
       }
-    } else {
-      this.filteredProducts.next([...this.products])
     }
+
+
   }
 
+
+
+    // let filteredList = []
+    // if(filteredList.length === 0) {
+    //   this.productUpdated.next([...this.products])
+    // }
+    // for(let b of brandList) {
+    //   if(form.controls[b].value === true) {
+    //     if(form.controls['inStock'].value === true) {
+    //       if(form.controls['outOfStock'].value === true) {
+    //         filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
+    //         this.filteredProducts.next([...filteredList])
+    //       }
+    //       filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
+    //       this.filteredProducts.next([...filteredList])
+    //       if(filteredList.length === 0) {
+    //         this.filteredProducts.next([])
+    //       }
+    //     }
+    //     else if(form.controls['outOfStock'].value === true) {
+    //       if(form.controls['inStock'].value === true) {
+    //         filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
+    //         this.filteredProducts.next([...filteredList])
+    //       }
+    //       filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
+    //       this.filteredProducts.next([...filteredList])
+    //       if(filteredList.length === 0) {
+    //         this.filteredProducts.next([])
+    //       }
+    //     }
+    //     else {
+    //       filteredList.push(...this.products.filter(p => p.brand === b))
+    //       this.filteredProducts.next([...filteredList])
+    //     }
+    //   }
+
+    // }
   getFilteredProductsListener() {
     return this.filteredProducts.asObservable()
+  }
+
+  addToCart(product: Product, qty: number) {
+    if(localStorage.getItem('cart') === null) {
+      localStorage.setItem('cart', JSON.stringify(this.cartList))
+      this.cartList.push({
+        _id: product._id, name: product.name, price: product.price, qty: 1, image: product.image
+      })
+      localStorage.setItem('cart', JSON.stringify(this.cartList))
+    } else {
+      this.cartList = JSON.parse(localStorage.getItem('cart'))
+      let productincart = this.cartList.find(p => p.name === product.name)
+      if(productincart) {
+        productincart.qty += qty
+      }
+      else if (!productincart) {
+        this.cartList.push({
+          _id: product._id, name: product.name, price: product.price, qty: qty, image: product.image
+        })
+      }
+      localStorage.setItem('cart', JSON.stringify(this.cartList))
+    }
+    this.cartListener.next([...this.cartList])
+  }
+
+  getItemsInCart() {
+    return JSON.parse(localStorage.getItem('cart'))
+  }
+
+  getCartListener() {
+    return this.cartListener.asObservable()
   }
 
 }

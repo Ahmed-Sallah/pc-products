@@ -2,27 +2,30 @@
   <div class="card">
     <div class="row">
       <div class="col-md-4">
-        <img [src]="product.image" class="img-fluid" alt="" />
+        <img [src]="product?.image" class="img-fluid" alt="" />
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h4>{{ product.name }}</h4>
+          <h4>{{ product?.name }}</h4>
           <hr />
-          <p class="p-price">{{ product.price }} LE</p>
-          <p class="p-brand">Brand: {{ product.brand }}</p>
-          <p class="p-available" *ngIf="product.availability">
+          <p class="p-price">{{ product?.price }} LE</p>
+          <p class="p-brand">Brand: {{ product?.brand }}</p>
+          <p class="p-available" *ngIf="product?.availability">
             Availability:
             <span><i class="fa-solid fa-check"></i> In Stock</span>
           </p>
-          <p class="p-notAvailable" *ngIf="!product.availability">
+          <p class="p-notAvailable" *ngIf="!product?.availability">
             Availability:
             <span><i class="fa-solid fa-xmark"></i> Out of Stock</span>
           </p>
           <p class="p-qty">
-            Qty <input type="number" min="1" value="1" class="form-control" />
+            Qty
+            <input type="number" min="1" value="1" class="form-control" #qty />
           </p>
         </div>
-        <button class="add-to-cart-button">Add To Cart</button>
+        <button class="add-to-cart-button" (click)="onAddToCart(qty.value)">
+          Add To Cart
+        </button>
         <button class="bye-button">Buy Now</button>
       </div>
     </div>

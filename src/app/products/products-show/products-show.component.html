@@ -1,42 +1,50 @@
 <div class="container-fluid">
-  <div class="no-products" *ngIf="products?.length < 1">No Products</div>
-  <div class="row" *ngIf="products?.length > 0">
+  <div class="row">
     <!-- Filter -->
     <div class="col-md-2">
       <div class="filter-card">
         <p class="filter-brand">Brand</p>
-        <div class="checkboxes">
-          <div *ngFor="let brand of brandList; let i = index">
+        <form (submit)="onFilter(filterForm)" #filterForm="ngForm">
+          <div class="checkboxes">
+            <div *ngFor="let brand of brandList">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                value="{{ brand }}"
+                id="{{ brand }}"
+                ngModel
+                name="{{ brand }}"
+              />
+              <label class="form-check-label" for="{{ brand }}">{{
+                brand
+              }}</label>
+            </div>
+            <hr />
+            <p class="filter-stock">Stock Status</p>
             <input
               type="checkbox"
               class="form-check-input"
-              id="{{ brand }}"
-              value="{{ brand }}"
-              (change)="onFilterByBrand($event, i)"
-              [checked]="selected === i"
+              name="inStock"
+              id="inStock"
+              value="inStock"
+              ngModel
             />
-            <label class="form-check-label" for="{{ brand }}">{{
-              brand
-            }}</label>
+            <label class="form-check-label" for="inStock">In Stock</label>
+            <br />
+            <input
+              type="checkbox"
+              class="form-check-input"
+              name="outOfStock"
+              id="outOfStock"
+              ngModel
+              value="outOfStock"
+            />
+            <label class="form-check-label" for="outOfStock"
+              >Out of Stock</label
+            >
           </div>
-          <hr />
-          <p class="filter-stock">Stock Status</p>
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="inStock"
-            (change)="onFilterByStock($event)"
-          />
-          <label class="form-check-label">In Stock</label>
-          <br />
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="outOfStock"
-            (change)="onFilterByStock($event)"
-          />
-          <label class="form-check-label">Out of Stock</label>
-        </div>
+          <button type="submit" class="filter-btn">Filter</button>
+        </form>
       </div>
     </div>
     <!-- Filter -->
@@ -51,21 +59,28 @@
             [(ngModel)]="search"
           />
         </div>
+        <div class="no-products" *ngIf="products?.length < 1">No Products</div>
         <div
           class="col-md-4"
           *ngFor="let product of products | searchFilter: search"
         >
-          <div class="card">
-            <p class="notInStock" *ngIf="!product.availability">OUT OF STOCK</p>
-            <a (click)="showProduct(product._id)">
-              <img [src]="product.image" class="card-img-top" alt="..." />
+          <div *ngIf="products?.length > 0">
+            <div class="card">
+              <p class="notInStock" *ngIf="!product.availability">
+                OUT OF STOCK
+              </p>
+              <a (click)="showProduct(product._id)">
+                <img [src]="product.image" class="card-img-top" alt="..." />
 
-              <div class="card-body">
-                <p class="p-name">{{ product.name }}</p>
-                <p class="p-price">{{ product.price }} LE</p>
-              </div>
-            </a>
-            <button class="add-to-cart-button">Add To Cart</button>
+                <div class="card-body">
+                  <p class="p-name">{{ product.name }}</p>
+                  <p class="p-price">{{ product.price }} LE</p>
+                </div>
+              </a>
+              <button class="add-to-cart-button" (click)="onAddToCart(product)">
+                Add To Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>

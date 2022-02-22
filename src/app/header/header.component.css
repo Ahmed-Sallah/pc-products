@@ -86,15 +86,21 @@ header {
   display: inline-block;
 }
 
+.dropdown-category:hover a {
+  transform: translatex(0px);
+}
+
 .dropdown-content-category {
-  display: none;
+  visibility: hidden;
   position: absolute;
   margin-left: 30px;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   z-index: 1;
+  opacity: 0;
+  transition: 0.3s;
 }
 
 .dropdown-content-category a {
@@ -104,6 +110,7 @@ header {
   display: block;
   transition: 0.2s;
   border-radius: 20px;
+  transform: translatex(-100px);
 }
 
 .dropdown-content-category a:hover {
@@ -112,7 +119,8 @@ header {
 }
 
 .dropdown-category:hover .dropdown-content-category {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .dropdown-category:hover .dropbtn-category {
@@ -136,33 +144,63 @@ header {
 }
 
 .dropdown-content-cart {
-  display: none;
+  visibility: hidden;
   position: absolute;
+  right: 12px;
   background-color: #f1f1f1;
-  min-width: 160px;
+  width: 500px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  border-radius: 1em;
   z-index: 1;
-}
-
-.dropdown-content-cart a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  transition: 0.2s;
-  border-radius: 20px;
-}
-
-.dropdown-content-cart a:hover {
-  color: white;
-  background-color: #0044ff;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: 0.4s;
 }
 
 .dropdown-cart:hover .dropdown-content-cart {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 .dropdown-cart:hover .dropbtn-cart {
   background-color: #0044ff;
+}
+
+.card {
+  background-color: #f1f1f1;
+}
+.col-6 {
+  text-align: center;
+}
+
+.cart-name {
+  font-size: 1em;
+  font-weight: 900;
+}
+
+.cart-qty {
+  font-size: 1em;
+  font-weight: 500;
+}
+.cart-price {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.cart-delete-btn {
+  background-color: #3a6cf4;
+  padding: 0.5em;
+  margin: 1em 0px;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 1em;
+  transition: 0.3s;
+}
+
+.noItemsInCart {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 700;
 }
