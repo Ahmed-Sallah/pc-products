@@ -1,0 +1,50 @@
+<div *ngIf="data.product.availability">
+  <h1 mat-dialog-title class="dialog-title">
+    Added to cart successfully. What is next?
+    <i class="fa-regular fa-face-grin-beam happy-emoji"></i>
+  </h1>
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="data.product.image" class="dialog-img img-fluid" alt="" />
+    </div>
+    <div class="col-md-8" mat-dialog-content>
+      <p class="dialog-name">{{ data.product.name }}</p>
+      <hr />
+      <p class="dialog-qty">Quantity: X{{ data.qty }}</p>
+      <p class="dialog-price">Price: {{ data.product.price * data.qty }} LE</p>
+
+      <p class="dialog-brand">Brand: {{ data.product.brand }}</p>
+      <p class="dialog-available">
+        Availability: <span><i class="fa-solid fa-check"></i> In Stock</span>
+      </p>
+    </div>
+    <div mat-dialog-actions style="padding: 0px">
+      <button mat-dialog-close class="dialog-close-btn">Okay</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="!data.product.availability">
+  <h1 mat-dialog-title class="dialog-title">
+    Sorry, This Item is Out of Stock
+    <i class="fa-regular fa-face-frown sad-emoji"></i>
+  </h1>
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="data.product.image" class="dialog-img img-fluid" alt="" />
+    </div>
+    <div class="col-md-8" mat-dialog-content>
+      <p class="dialog-name">{{ data.product.name }}</p>
+      <hr />
+      <p class="dialog-price">Price: {{ data.product.price }} LE</p>
+
+      <p class="dialog-brand">Brand: {{ data.product.brand }}</p>
+      <p class="dialog-notAvailable">
+        Availability:
+        <span><i class="fa-solid fa-xmark"></i> Out of Stock</span>
+      </p>
+    </div>
+    <div mat-dialog-actions style="padding: 0px">
+      <button mat-dialog-close class="dialog-close-btn">Okay</button>
+    </div>
+  </div>
+</div>

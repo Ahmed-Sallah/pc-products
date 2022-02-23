@@ -11,6 +11,10 @@ import { HomeComponent } from './products/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddToCartDialog } from './CartDialog/addToCartDialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     ProductsShowComponent,
     ProductDetailsComponent,
     HomeComponent,
+    AddToCartDialog,
     SearchFilterPipe
   ],
   imports: [
@@ -25,9 +30,11 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddToCartDialog]
 })
 export class AppModule { }

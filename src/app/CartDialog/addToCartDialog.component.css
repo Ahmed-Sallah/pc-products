@@ -1,0 +1,51 @@
+.dialog-name {
+  font-size: 1.7em;
+  font-weight: 500;
+}
+.dialog-price,
+.dialog-qty {
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
+.dialog-brand {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.dialog-available,
+.dialog-notAvailable {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.dialog-available span,
+.happy-emoji {
+  color: green;
+}
+
+.dialog-notAvailable span,
+.sad-emoji {
+  color: red;
+}
+
+.dialog-close-btn {
+  margin-left: auto;
+}
+
+.dialog-close-btn {
+  background-color: #3a6cf4;
+  color: white;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  padding: 15px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 2em;
+  transition: 0.3s;
+}
+
+.dialog-close-btn:hover {
+  transform: scale(1.1);
+  background-color: #0044ff;
+}

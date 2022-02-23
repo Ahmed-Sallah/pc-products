@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { of, Subject } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { Subject } from "rxjs";
+import { AddToCartDialog } from "../CartDialog/addToCartDialog.component";
 import { Product } from "./product.model";
 
 @Injectable({providedIn: 'root'})
@@ -13,7 +15,7 @@ export class ProductsService {
   private cartListener = new Subject<{_id: string, name: string, price: number, qty: number, image: string}[]>()
   private cartList: {_id: string, name: string, price: number, qty: number, image: string}[] = []
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dialog: MatDialog) {}
 
   getProducts(type: string) {
     this.http.get<{message: string, products: Product[]}>('http://localhost:3000/products/' + type)
@@ -107,8 +109,10 @@ export class ProductsService {
 
   addToCart(product: Product, qty: number) {
     if(!product.availability) {
+      this.dialog.open(AddToCartDialog, {data: {product, qty}})
       return
     }
+    this.dialog.open(AddToCartDialog, {data: {product, qty}})
     if(localStorage.getItem('cart') === null) {
       localStorage.setItem('cart', JSON.stringify(this.cartList))
       this.cartList.push({
