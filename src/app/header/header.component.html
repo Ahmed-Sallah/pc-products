@@ -7,7 +7,10 @@
     <a routerLink="">
       <i class="fa-solid fa-align-justify"></i> POWERED BY ASUS PC BUILDER</a
     >
-    <a routerLink="">
+    <a
+      href="https://www.microsoft.com/en-us/software-download/windows11"
+      target="_blank"
+    >
       <i class="fa-solid fa-cloud-arrow-down"></i> WINDOWS 11 DOWNLOAD</a
     >
     <a routerLink=""><i class="fa-solid fa-phone"></i> NEED HELP?</a>
@@ -83,7 +86,7 @@
             <p class="cart-name">{{ item.name }}</p>
             <p class="cart-qty">X {{ item.qty }}</p>
             <p class="cart-price">{{ item.price * item.qty }} LE</p>
-            <button class="cart-delete-btn">
+            <button class="cart-delete-btn" (click)="onDeleteFromStock(item)">
               <i class="fa-regular fa-trash-can"></i> Delete
             </button>
           </div>

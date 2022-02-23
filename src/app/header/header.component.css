@@ -179,24 +179,31 @@ header {
   font-weight: 900;
 }
 
-.cart-qty {
-  font-size: 1em;
-  font-weight: 500;
-}
-.cart-price {
+.cart-qty .cart-price {
   font-size: 1em;
   font-weight: 500;
 }
 
 .cart-delete-btn {
-  background-color: #3a6cf4;
-  padding: 0.5em;
-  margin: 1em 0px;
+  background-color: rgb(49, 47, 47);
   color: white;
+  padding: 7px 14px;
+  margin-bottom: 0.5em;
   font-size: 16px;
   border: none;
+  border-right: 5px solid rgb(49, 47, 47);
+  border-left: 5px solid rgb(49, 47, 47);
   border-radius: 1em;
-  transition: 0.3s;
+  transition: 0.2s;
+}
+
+.cart-delete-btn i {
+  color: rgb(218, 53, 53);
+}
+
+.cart-delete-btn:hover {
+  border-right: 5px solid #3a6cf4;
+  border-left: 5px solid #3a6cf4;
 }
 
 .noItemsInCart {

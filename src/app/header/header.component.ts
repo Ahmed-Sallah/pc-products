@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit , OnDestroy{
       })
   }
 
+  onDeleteFromStock(item: {_id: string, name: string, price: number, qty: number, image: string}) {
+    this.productsService.deleteFromCart(item)
+  }
+
   ngOnDestroy(): void {
       this.cartListenerSub.unsubscribe()
   }

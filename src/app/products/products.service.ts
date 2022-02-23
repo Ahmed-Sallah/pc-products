@@ -106,6 +106,9 @@ export class ProductsService {
   }
 
   addToCart(product: Product, qty: number) {
+    if(!product.availability) {
+      return
+    }
     if(localStorage.getItem('cart') === null) {
       localStorage.setItem('cart', JSON.stringify(this.cartList))
       this.cartList.push({
@@ -134,6 +137,13 @@ export class ProductsService {
 
   getCartListener() {
     return this.cartListener.asObservable()
+  }
+
+  deleteFromCart(item: {_id: string, name: string, price: number, qty: number, image: string}) {
+    this.cartList = JSON.parse(localStorage.getItem('cart'))
+    this.cartList = this.cartList.filter(p => p._id !== item._id)
+    localStorage.setItem('cart', JSON.stringify(this.cartList))
+    this.cartListener.next([...this.cartList])
   }
 
 }

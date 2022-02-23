@@ -50,12 +50,7 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
   }
 
   onAddToCart(product: Product) {
-    if(!product.availability) {
-      return
-    } else {
-      this.productsService.addToCart(product, 1)
-
-    }
+    this.productsService.addToCart(product, 1)
   }
 
 
