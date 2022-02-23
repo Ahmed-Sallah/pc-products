@@ -120,6 +120,7 @@ export class ProductsService {
       })
       localStorage.setItem('cart', JSON.stringify(this.cartList))
     } else {
+
       this.cartList = JSON.parse(localStorage.getItem('cart'))
       let productincart = this.cartList.find(p => p.name === product.name)
       if(productincart) {
