@@ -3,9 +3,14 @@ const mongoose = require('mongoose')
 const app = express()
 const cors = require('cors')
 
-const Component = require('./models/product')
+const productsRoutes = require('./routes/products')
+const usersRoutes = require('./routes/users')
 
 app.use(cors())
+app.use(express.json())
+
+app.use('', productsRoutes)
+app.use('', usersRoutes)
 
 mongoose.connect('mongodb://localhost:27017/pc-components')
   .then(() => {
@@ -16,21 +21,6 @@ mongoose.connect('mongodb://localhost:27017/pc-components')
     console.log(err)
   })
 
-app.get('/products/:type', (req, res, next) => {
-  const type = req.params.type
-  Component.find({type: type})
-    .then((products) => {
-      res.status(200).json({message: 'Products Fetched Successfully', products})
-    })
-})
-
-app.get('/products/:type/:id', (req, res, next) => {
-  const id = req.params.id
-  Component.findById(id)
-    .then((product) => {
-      res.status(200).json({message: 'Product Found', product})
-    })
-})
 
 app.listen(3000, () => {
   console.log('Serving on port 3000')

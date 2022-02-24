@@ -223,8 +223,8 @@ header {
 }
 
 .cart-delete-btn:hover {
-  border-right: 5px solid #3a6cf4;
-  border-left: 5px solid #3a6cf4;
+  border-right: 5px solid rgb(218, 53, 53);
+  border-left: 5px solid rgb(218, 53, 53);
 }
 
 .noItemsInCart {

@@ -38,7 +38,6 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
     .subscribe((products: Product[]) => {
       this.products = products
     })
-
   }
 
   showProduct(id: string) {

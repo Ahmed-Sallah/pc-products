@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddToCartDialog } from './CartDialog/addToCartDialog.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AddToCartDialog } from './CartDialog/addToCartDialog.component';
     ProductDetailsComponent,
     HomeComponent,
     AddToCartDialog,
-    SearchFilterPipe
+    SearchFilterPipe,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

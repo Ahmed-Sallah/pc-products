@@ -1,0 +1,81 @@
+.container-fluid,
+.row {
+  height: 100%;
+  margin-top: 200px;
+}
+
+.card {
+  box-shadow: 5px 10px rgb(226, 226, 226);
+}
+
+.title {
+  font-size: 3em;
+  font-weight: 700;
+  text-align: center;
+  color: rgb(53, 52, 52);
+}
+
+form {
+  margin: 0px 30px 50px 30px;
+}
+input,
+label {
+  display: block;
+}
+
+label {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  background-color: rgb(49, 47, 47);
+  color: white;
+  height: 2.5em;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  border-right: 5px solid #3a6cf4;
+  border-left: 5px solid #3a6cf4;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input:-webkit-autofill {
+  box-shadow: 0 0 0 30px rgb(49, 47, 47) inset;
+}
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}
+p {
+  font-size: 0.8em;
+  margin: 0px;
+  color: rgb(235, 31, 31);
+}
+
+.register-btn {
+  background-color: #3a6cf4;
+  color: white;
+  padding: 10px 20px;
+  margin-left: auto;
+  font-size: 16px;
+  border: none;
+  border-radius: 1em;
+  transition: 0.3s;
+}
+
+.register-btn:hover:not([disabled]) {
+  background-color: #0044ff;
+}
+
+.register-btn:disabled {
+  opacity: 0.7;
+}

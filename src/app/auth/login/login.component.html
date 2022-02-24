@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+      <div class="card">
+        <p class="title">Login</p>
+        <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+          <label>E-Mail Address</label>
+          <input
+            type="text"
+            name="email"
+            #emailInput="ngModel"
+            ngModel
+            required
+            email
+          />
+          <p *ngIf="emailInput.invalid && emailInput.touched">
+            Please Enter a Valid Email.
+          </p>
+
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            #passInput="ngModel"
+            minlength="5"
+            ngModel
+            required
+          />
+          <p *ngIf="passInput.invalid && passInput.touched">
+            Please Enter a Valid Password
+          </p>
+          <button
+            class="login-btn"
+            type="submit"
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
