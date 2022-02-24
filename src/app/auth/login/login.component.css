@@ -73,3 +73,10 @@ p {
 .login-btn:disabled {
   opacity: 0.7;
 }
+
+.register-link {
+  color: #0044ff;
+  font-size: 1.1em;
+  margin-left: 1em;
+  text-decoration: none;
+}

@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-products-show',
   templateUrl: './products-show.component.html',
-  styleUrls: ['./products-show.component.css']
+  styleUrls: ['./products-show.component.css'],
 })
 export class ProductsShowComponent implements OnInit, OnDestroy {
   products: Product[]
@@ -16,15 +17,24 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
   brandList = new Set<string>()
   private productSub: Subscription
   private filteredSub: Subscription
+  private isAdminStatusListener: Subscription
   search = ''
+  isAdmin = false
 
-  constructor(private productsService: ProductsService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private authService: AuthService, private productsService: ProductsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const type = params['type']
       this.productsService.getProducts(type)
     })
+
+    this.isAdmin = this.authService.getIsAdmin()
+    this.isAdminStatusListener = this.authService.getIsAdminStatusListener()
+      .subscribe(isadmin => {
+        this.isAdmin = isadmin
+      })
+
     this.productSub = this.productsService.getProductsUpdateListener()
     .subscribe((products: Product[]) => {
       this.products = products
@@ -56,6 +66,7 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.productSub.unsubscribe()
     this.filteredSub.unsubscribe()
+    this.isAdminStatusListener.unsubscribe()
   }
 
 }

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './products/header/header.component';
 import { ProductsShowComponent } from './products/products-show/products-show.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { HomeComponent } from './products/home/home.component';
@@ -16,18 +16,24 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddToCartDialog } from './CartDialog/addToCartDialog.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ProductsComponent } from './products/products.component';
+import { AdminComponent } from './admin/admin.components';
+import { AdminHeader } from './admin/admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    ProductsComponent,
+    AdminComponent,
     ProductsShowComponent,
     ProductDetailsComponent,
     HomeComponent,
     AddToCartDialog,
     SearchFilterPipe,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminHeader
   ],
   imports: [
     BrowserModule,

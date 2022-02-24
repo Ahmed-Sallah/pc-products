@@ -16,12 +16,18 @@
     <a href="https://web.whatsapp.com/send?phone=201067721955" target="_blank"
       ><i class="fa-solid fa-phone"></i> NEED HELP?</a
     >
+    <a [routerLink]="['admin']" *ngIf="isAdmin"
+      ><i class="fa-solid fa-screwdriver-wrench"></i> Admin Tool</a
+    >
   </nav>
   <div class="spacer"></div>
   <i class="fa-regular fa-user fa-3x"></i>
   <nav class="register">
-    <a routerLink="login">login</a>
-    <a routerLink="register">Register</a>
+    <a routerLink="login" *ngIf="!userIsAuthenticated">login</a>
+    <a routerLink="register" *ngIf="!userIsAuthenticated">Register</a>
+    <button class="logout-btn" (click)="onLogout()" *ngIf="userIsAuthenticated">
+      Logout <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
   </nav>
 </header>
 
@@ -68,7 +74,7 @@
     </div>
   </div>
 
-  <div class="dropdown-cart">
+  <div class="dropdown-cart" *ngIf="!isAdmin">
     <button class="dropbtn-cart">
       <i class="fa-solid fa-cart-shopping"></i> My Cart
       <i class="fa-solid fa-caret-down"></i>
@@ -77,6 +83,7 @@
       <p class="noItemsInCart" *ngIf="items?.length < 1">
         Your shopping cart is empty!
       </p>
+
       <div class="card" *ngFor="let item of items">
         <div class="row">
           <div class="col-6 d-flex align-items-center">
@@ -94,6 +101,7 @@
           </div>
         </div>
       </div>
+      <button *ngIf="items?.length > 0" class="viewcart-btn">View Cart</button>
     </div>
   </div>
 </div>

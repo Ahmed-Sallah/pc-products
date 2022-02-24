@@ -77,7 +77,11 @@
                   <p class="p-price">{{ product.price }} LE</p>
                 </div>
               </a>
-              <button class="add-to-cart-button" (click)="onAddToCart(product)">
+              <button
+                class="add-to-cart-button"
+                *ngIf="!isAdmin"
+                (click)="onAddToCart(product)"
+              >
                 Add To Cart
               </button>
             </div>

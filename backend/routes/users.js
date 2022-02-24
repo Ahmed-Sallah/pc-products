@@ -17,7 +17,7 @@ router.post("/register", (req, res, next) => {
           email: req.body.email,
           phone: req.body.phone,
           password: hash,
-          roles: ['admin']
+          roles: 'admin'
         })
         console.log('admin created')
       } else {
@@ -62,7 +62,9 @@ router.post('/login', (req, res, next) => {
         {expiresIn: '1h'}
       )
       res.status(200).json({
-        token: token
+        token: token,
+        expiresIn: 3600,
+        role: fetchedUser.roles,
       })
     })
     .catch(err => {

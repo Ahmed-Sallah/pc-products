@@ -58,7 +58,7 @@ input[type="number"] {
 }
 
 .add-to-cart-button:hover,
-.bye-button:hover {
+.buy-button:hover {
   transform: scale(1.1);
   background-color: #0044ff;
 }

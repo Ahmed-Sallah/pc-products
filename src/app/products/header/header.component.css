@@ -150,7 +150,6 @@ header {
   width: 500px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   max-height: 650px;
-
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: 1em;
@@ -231,4 +230,17 @@ header {
   text-align: center;
   font-size: 1.5em;
   font-weight: 700;
+}
+
+.logout-btn {
+  background-color: #3a6cf4;
+  color: white;
+  padding: 5px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 1em;
+  transition: 0.3s;
+}
+
+.viewcart-btn {
 }

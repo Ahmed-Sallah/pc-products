@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 
@@ -8,10 +10,11 @@ import { ProductsService } from '../products.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
   product: Product
-
-  constructor(private productsService: ProductsService, private route: ActivatedRoute) { }
+  isAdmin = false
+  private isAdminStatusListener: Subscription
+  constructor(private authService: AuthService, private productsService: ProductsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -22,11 +25,21 @@ export class ProductDetailsComponent implements OnInit {
           this.product = productData.product
         })
     })
+
+    this.isAdmin = this.authService.getIsAdmin()
+    this.isAdminStatusListener = this.authService.getIsAdminStatusListener()
+      .subscribe(isadmin => {
+        this.isAdmin = isadmin
+      })
   }
 
 
   onAddToCart(qty) {
     this.productsService.addToCart(this.product, +qty)
+  }
+
+  ngOnDestroy(): void {
+    this.isAdminStatusListener.unsubscribe()
   }
 
 }

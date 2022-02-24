@@ -3,5 +3,5 @@ export interface AuthData {
   lastName: string
   email: string
   phone: string
-  password: string
+  password?: string
 }
