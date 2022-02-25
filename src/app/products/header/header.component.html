@@ -45,7 +45,6 @@
     </div>
   </div>
 
-  <i class="fa-regular fa-user fa-2x" *ngIf="!userIsAuthenticated"></i>
   <nav class="register d-flex" *ngIf="!userIsAuthenticated">
     <a routerLink="login" *ngIf="!userIsAuthenticated">login</a>
     <a routerLink="register" *ngIf="!userIsAuthenticated">Register</a>

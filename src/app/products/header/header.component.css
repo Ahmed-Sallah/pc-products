@@ -258,6 +258,7 @@ header {
   color: BLACK;
   font-size: 16px;
   border: none;
+  margin-right: 70px;
   border-radius: 1em;
   transition: 0.3s;
 }
@@ -266,7 +267,6 @@ header {
 .dropdown {
   position: relative;
   display: inline-block;
-  margin-right: 150px;
 }
 .dropdown:hover a,
 .dropdown:hover button {
@@ -276,7 +276,8 @@ header {
 /* Dropdown Content (Hdden by Default) */
 .dropdown-content {
   visibility: hidden;
-  position: absolute;
+  position: fixed;
+  right: 5px;
   background-color: #f1f1f1;
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -291,6 +292,7 @@ header {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
+  border-radius: 10px;
   display: block;
   transition: 0.2s;
   transform: translatex(-100px);

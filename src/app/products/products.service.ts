@@ -4,6 +4,7 @@ import { NgForm } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Subject } from "rxjs";
 import { AddToCartDialog } from "../CartDialog/addToCartDialog.component";
+import { NotificationService } from "../Notification/notification.service";
 import { Product } from "./product.model";
 
 @Injectable({providedIn: 'root'})
@@ -14,7 +15,7 @@ export class ProductsService {
   private filteredProducts = new Subject<Product[]>()
   private cartListener = new Subject<{_id: string, name: string, price: number, qty: number, image: string, brand: string}[]>()
   private cartList: {_id: string, name: string, price: number, qty: number, image: string, brand: string}[] = []
-  constructor(private http: HttpClient, private dialog: MatDialog) {}
+  constructor(private http: HttpClient, private dialog: MatDialog, private notifyService : NotificationService) {}
 
   getProducts(type: string) {
     this.http.get<{message: string, products: Product[]}>('http://localhost:3000/products/' + type)
@@ -147,6 +148,8 @@ export class ProductsService {
     this.cartList = this.cartList.filter(p => p._id !== item._id)
     localStorage.setItem('cart', JSON.stringify(this.cartList))
     this.cartListener.next([...this.cartList])
+    this.notifyService.showSuccess('Deleted', 'Successfully deleted from cart')
+
   }
 
 }

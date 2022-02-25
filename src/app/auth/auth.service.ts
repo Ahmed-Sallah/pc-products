@@ -17,6 +17,8 @@ export class AuthService {
   private token: string
   private tokenTimer: any
   private userId: string
+  private itemsInWishList: Product[] = []
+  private wishListUpdated = new Subject<Product[]>()
 
   constructor(private http: HttpClient, private router: Router, private notifyService : NotificationService) {}
 
@@ -146,12 +148,20 @@ export class AuthService {
 
 
   getItemsInWishList() {
-    return this.http.get<{wishList: Product[]}>('http://localhost:3000/getWishList/' + this.userId)
+    this.http.get<{wishList: Product[]}>('http://localhost:3000/getWishList/' + this.userId)
+      .subscribe(response => {
+        this.itemsInWishList = response.wishList
+        this.wishListUpdated.next([...this.itemsInWishList])
+      })
+  }
+
+  getWishListUpdateListener() {
+    return this.wishListUpdated.asObservable()
   }
 
   addToWishList(product: Product){
     if(this.isAuth === false) {
-      this.notifyService.showError('Login', 'You Must Login First')
+      this.notifyService.showError('Login', 'Please Login First')
       this.router.navigate(['login'])
     } else {
       this.http.post<{message: string, title: string}>('http://localhost:3000/addToWishList/' + this.userId, product)
@@ -161,13 +171,17 @@ export class AuthService {
             this.notifyService.showSuccess(response.title, response.message)
           }else if(response.title === 'Error'){
             this.notifyService.showError(response.title, response.message)
-
           }
         })
     }
   }
 
   removeItemFromWishList(itemId: string) {
-
+    this.http.delete<{message: string, title: string}>('http://localhost:3000/deleteFromWishList/' + this.userId + '/' + itemId)
+      .subscribe(response => {
+        this.notifyService.showSuccess(response.title, response.message)
+        this.itemsInWishList = this.itemsInWishList.filter(item => item._id !== itemId)
+        this.wishListUpdated.next([...this.itemsInWishList])
+      })
   }
 }

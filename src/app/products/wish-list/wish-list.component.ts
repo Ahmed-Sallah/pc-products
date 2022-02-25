@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
@@ -8,14 +9,16 @@ import { ProductsService } from '../products.service';
   templateUrl: './wish-list.component.html',
   styleUrls: ['./wish-list.component.css']
 })
-export class WishListComponent implements OnInit {
+export class WishListComponent implements OnInit , OnDestroy{
   wishListItems: Product[]
+  wishListSub: Subscription
   constructor(private authService: AuthService, private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.authService.getItemsInWishList()
-      .subscribe(response => {
-        this.wishListItems = response.wishList
+    this.wishListSub = this.authService.getWishListUpdateListener()
+      .subscribe(wishList => {
+        this.wishListItems = wishList
       })
   }
 
@@ -25,6 +28,10 @@ export class WishListComponent implements OnInit {
 
   onRemoveFromWishList(itemId: string) {
     this.authService.removeItemFromWishList(itemId)
+  }
+
+  ngOnDestroy(): void {
+    this.wishListSub.unsubscribe()
   }
 
 }

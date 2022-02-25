@@ -1,5 +1,8 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="no-items" *ngIf="wishListItems.length < 1">
+      Your Wish List is Empty
+    </div>
     <div class="col-md-3" *ngFor="let item of wishListItems">
       <div *ngIf="wishListItems?.length > 0">
         <div class="card">
@@ -9,11 +12,21 @@
             <p class="p-name">{{ item.name }}</p>
             <p class="p-brand">{{ item.brand }}</p>
             <p class="p-price">{{ item.price }} LE</p>
-            <button class="add-to-cart-button" (click)="onAddToCart(item)">
-              Add To Cart
+            <button
+              class="add-to-cart-button"
+              matTooltip="Add To Cart"
+              matTooltipPosition="below"
+              (click)="onAddToCart(item)"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
             </button>
-            <button class="remove" (click)="onRemoveFromWishList(item._id)">
-              Remove
+            <button
+              class="remove"
+              matTooltip="Remove From Wish List"
+              matTooltipPosition="below"
+              (click)="onRemoveFromWishList(item._id)"
+            >
+              <i class="fa-solid fa-x"></i>
             </button>
           </div>
         </div>

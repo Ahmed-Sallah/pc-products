@@ -20,7 +20,6 @@ router.post("/register", (req, res, next) => {
           password: hash,
           roles: 'admin'
         })
-        console.log('admin created')
       } else {
         user = new User({
           firstName: req.body.firstName,
@@ -94,7 +93,6 @@ router.post('/addToWishList/:userId', async (req, res, next) => {
   }
 
 
-  console.log(user.wishList)
 })
 
 router.get('/getWishList/:userId', (req, res, next) => {
@@ -102,6 +100,20 @@ router.get('/getWishList/:userId', (req, res, next) => {
     .then(user => {
       res.status(200).json({wishList: user.wishList})
     })
+})
+
+router.delete('/deleteFromWishList/:userId/:itemId', async (req, res, next) => {
+  const user = await User.findOne({_id: req.params.userId})
+  for(let i=0; i< user.wishList.length; i++) {
+    if(user.wishList[i]._id.equals(req.params.itemId)) {
+      user.wishList.splice(i, 1)
+      break
+    }
+  }
+  await user.save()
+  console.log(user.wishList)
+
+  res.status(200).json({title: 'Success', message: 'Deleted From Wish List'})
 })
 
 
