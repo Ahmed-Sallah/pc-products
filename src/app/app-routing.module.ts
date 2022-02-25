@@ -9,6 +9,7 @@ import { HomeComponent } from './products/home/home.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductsShowComponent } from './products/products-show/products-show.component';
 import { ProductsComponent } from './products/products.component';
+import { WishListComponent } from './products/wish-list/wish-list.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       {path: 'products/:type', component: ProductsShowComponent},
       {path: 'products/:type/:id', component: ProductDetailsComponent},
       {path: 'edit/account', component: EditAccountComponent},
+      {path: 'wish-list', component: WishListComponent},
     ]
   },
   {path: 'login', component: LoginComponent},

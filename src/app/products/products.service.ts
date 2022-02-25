@@ -12,8 +12,8 @@ export class ProductsService {
   private products: Product[] = []
   private productUpdated = new Subject<Product[]>()
   private filteredProducts = new Subject<Product[]>()
-  private cartListener = new Subject<{_id: string, name: string, price: number, qty: number, image: string}[]>()
-  private cartList: {_id: string, name: string, price: number, qty: number, image: string}[] = []
+  private cartListener = new Subject<{_id: string, name: string, price: number, qty: number, image: string, brand: string}[]>()
+  private cartList: {_id: string, name: string, price: number, qty: number, image: string, brand: string}[] = []
   constructor(private http: HttpClient, private dialog: MatDialog) {}
 
   getProducts(type: string) {
@@ -115,7 +115,7 @@ export class ProductsService {
     if(localStorage.getItem('cart') === null) {
       localStorage.setItem('cart', JSON.stringify(this.cartList))
       this.cartList.push({
-        _id: product._id, name: product.name, price: product.price, qty: 1, image: product.image
+        _id: product._id, name: product.name, price: product.price, qty: 1, image: product.image, brand: product.brand
       })
       localStorage.setItem('cart', JSON.stringify(this.cartList))
     } else {
@@ -126,7 +126,7 @@ export class ProductsService {
       }
       else if (!productincart) {
         this.cartList.push({
-          _id: product._id, name: product.name, price: product.price, qty: qty, image: product.image
+          _id: product._id, name: product.name, price: product.price, qty: qty, image: product.image, brand: product.brand
         })
       }
       localStorage.setItem('cart', JSON.stringify(this.cartList))

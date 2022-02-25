@@ -122,8 +122,8 @@
 }
 
 .notInStock {
-  margin-top: 0.3em;
   padding: 0.3em 1.5em;
+  margin-bottom: 0px;
   background-color: rgb(131, 10, 10);
   color: white;
   border-radius: 1em;

@@ -145,6 +145,10 @@ export class AuthService {
   }
 
 
+  getItemsInWishList() {
+    return this.http.get<{wishList: Product[]}>('http://localhost:3000/getWishList/' + this.userId)
+  }
+
   addToWishList(product: Product){
     if(this.isAuth === false) {
       this.notifyService.showError('Login', 'You Must Login First')
@@ -161,5 +165,9 @@ export class AuthService {
           }
         })
     }
+  }
+
+  removeItemFromWishList(itemId: string) {
+
   }
 }

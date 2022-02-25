@@ -28,6 +28,9 @@
         <i class="fa-solid fa-caret-down" style="margin-left: 5px"></i>
       </button>
       <div class="dropdown-content">
+        <a routerLink="/wish-list"
+          ><i class="fa-solid fa-heart"></i> View Wish List</a
+        >
         <a routerLink="/edit/account"
           ><i class="fa-solid fa-pen-to-square"></i> Edit Account</a
         >
@@ -105,12 +108,20 @@
       <div class="card" *ngFor="let item of items">
         <div class="row">
           <div class="col-6 d-flex align-items-center">
-            <div class="card card-img m-2">
+            <div
+              [routerLink]="['products', item.brand, item._id]"
+              class="card card-img m-2"
+            >
               <img src="{{ item.image }}" alt="" class="cart-img" />
             </div>
           </div>
           <div class="col-6">
-            <p class="cart-name">{{ item.name }}</p>
+            <p
+              class="cart-name"
+              [routerLink]="['products', item.brand, item._id]"
+            >
+              {{ item.name }}
+            </p>
             <p class="cart-qty">X {{ item.qty }}</p>
             <p class="cart-price">{{ item.price * item.qty }} LE</p>
             <button class="cart-delete-btn" (click)="onDeleteFromStock(item)">

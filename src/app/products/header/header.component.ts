@@ -10,7 +10,7 @@ import { ProductsService } from '../products.service';
 })
 export class HeaderComponent implements OnInit , OnDestroy{
 
-  items: {_id: string, name: string, price: number, qty: number, image: string}[]
+  items: {_id: string, name: string, price: number, qty: number, image: string, brand: string}[]
   private cartListenerSub: Subscription
   private authStatusListener: Subscription
   private isAdminStatusListener: Subscription

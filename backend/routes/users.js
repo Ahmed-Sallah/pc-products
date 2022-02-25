@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
+const user = require('../models/user')
 
 router.post("/register", (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -94,6 +95,13 @@ router.post('/addToWishList/:userId', async (req, res, next) => {
 
 
   console.log(user.wishList)
+})
+
+router.get('/getWishList/:userId', (req, res, next) => {
+  User.findOne({_id: req.params.userId}).populate('wishList')
+    .then(user => {
+      res.status(200).json({wishList: user.wishList})
+    })
 })
 
 

@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let item of wishListItems">
+      <div *ngIf="wishListItems?.length > 0">
+        <div class="card">
+          <p class="notInStock" *ngIf="!item.availability">OUT OF STOCK</p>
+          <img [src]="item.image" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="p-name">{{ item.name }}</p>
+            <p class="p-brand">{{ item.brand }}</p>
+            <p class="p-price">{{ item.price }} LE</p>
+            <button class="add-to-cart-button" (click)="onAddToCart(item)">
+              Add To Cart
+            </button>
+            <button class="remove" (click)="onRemoveFromWishList(item._id)">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

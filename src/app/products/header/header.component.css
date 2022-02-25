@@ -194,9 +194,14 @@ header {
   text-align: center;
 }
 
+.card-img {
+  cursor: pointer;
+}
+
 .cart-name {
   font-size: 1em;
   font-weight: 900;
+  cursor: pointer;
 }
 
 .cart-qty .cart-price {
@@ -268,7 +273,7 @@ header {
   transform: translatex(0px);
 }
 
-/* Dropdown Content (Hidden by Default) */
+/* Dropdown Content (Hdden by Default) */
 .dropdown-content {
   visibility: hidden;
   position: absolute;

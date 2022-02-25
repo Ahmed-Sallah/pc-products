@@ -22,6 +22,7 @@ import { AdminHeader } from './admin/admin-header/admin-header.component';
 import { EditAccountComponent } from './products/edit-account/edit-account.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ToastrModule } from 'ngx-toastr';
+import { WishListComponent } from './products/wish-list/wish-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     RegisterComponent,
     AdminHeader,
-    EditAccountComponent
+    EditAccountComponent,
+    WishListComponent
   ],
   imports: [
     BrowserModule,
