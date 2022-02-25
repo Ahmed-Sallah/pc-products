@@ -2,6 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { NotificationService } from "../Notification/notification.service";
+import { Product } from "../products/product.model";
 import { AuthData } from "./auth-data.model";
 
 @Injectable({ providedIn: 'root' })
@@ -14,19 +16,22 @@ export class AuthService {
   private isAuth = false
   private token: string
   private tokenTimer: any
+  private userId: string
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private notifyService : NotificationService) {}
 
   register(authData: AuthData) {
-    this.http.post('http://localhost:3000/register', authData)
+    this.http.post<{message: string, result: any}>('http://localhost:3000/register', authData)
       .subscribe(response => {
+        this.userId = response.result._id
         this.login(authData.email, authData.password)
       })
   }
 
   login(email: string, password: string) {
-    this.http.post<{token: string, role: any, expiresIn: number }>('http://localhost:3000/login', {email, password})
+    this.http.post<{token: string, role: any, expiresIn: number, userId: string }>('http://localhost:3000/login', {email, password})
       .subscribe(response => {
+        this.userId = response.userId
         this.token = response.token
         if(this.token) {
           if(response.role[0] === 'admin') {
@@ -44,8 +49,7 @@ export class AuthService {
           this.authStatusListener.next(true)
           const now = new Date()
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000)
-          console.log(expirationDate)
-          this.saveAuthData(this.token, expirationDate, this.isAdmin.toString())
+          this.saveAuthData(this.token, expirationDate, this.isAdmin.toString(), this.userId)
           this.router.navigate(['products', 'motherboards'])
         }
       })
@@ -88,36 +92,46 @@ export class AuthService {
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime()
     if(expiresIn > 0) {
       this.token = authInformation.token
-      console.log(this.isAdmin)
-      if(authInformation.isAdmin === 'true') {
+      if(authInformation.isAdmin === 'trueadmin') {
         this.isAdmin = true
         this.isAdminStatusListener.next(true)
       }
       this.isAuth = true
       this.setAuthTimer(expiresIn / 1000)
       this.authStatusListener.next(true)
+      this.userId = authInformation._id
     }
   }
 
-  private saveAuthData(token: string, expirationDate: Date, isAdmin: string) {
+  private saveAuthData(token: string, expirationDate: Date, isAdmin: string, _id: string) {
     localStorage.setItem('token', token)
     localStorage.setItem('expiration', expirationDate.toISOString())
-    localStorage.setItem('isAdmin', isAdmin)
+    localStorage.setItem('_id', _id)
+    if(isAdmin === 'false') {
+      localStorage.setItem('isAdmin', isAdmin)
+
+    } else {
+      localStorage.setItem('isAdmin', isAdmin + 'admin')
+    }
   }
 
   private clearAuthData() {
     localStorage.removeItem('token')
     localStorage.removeItem('expiration')
+    localStorage.removeItem('isAdmin')
+    localStorage.removeItem('_id')
   }
 
   private getAuthData() {
     const token = localStorage.getItem("token")
     const expirationDate = localStorage.getItem("expiration")
     const isAdmin = localStorage.getItem("isAdmin")
+    const _id = localStorage.getItem("_id")
     if (!token || !expirationDate) {
       return null
     }
     return {
+      _id,
       isAdmin,
       token,
       expirationDate: new Date(expirationDate),
@@ -125,9 +139,27 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log("Setting Timer:" + duration)
     this.tokenTimer = setTimeout(() => {
       this.logout()
     }, duration * 1000)
+  }
+
+
+  addToWishList(product: Product){
+    if(this.isAuth === false) {
+      this.notifyService.showError('Login', 'You Must Login First')
+      this.router.navigate(['login'])
+    } else {
+      this.http.post<{message: string, title: string}>('http://localhost:3000/addToWishList/' + this.userId, product)
+        .subscribe(response => {
+          console.log(response.title)
+          if(response.title === 'Success') {
+            this.notifyService.showSuccess(response.title, response.message)
+          }else if(response.title === 'Error'){
+            this.notifyService.showError(response.title, response.message)
+
+          }
+        })
+    }
   }
 }

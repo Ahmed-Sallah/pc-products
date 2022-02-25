@@ -21,13 +21,31 @@
     >
   </nav>
   <div class="spacer"></div>
-  <i class="fa-regular fa-user fa-3x"></i>
-  <nav class="register">
+  <div>
+    <div class="dropdown" *ngIf="userIsAuthenticated">
+      <button class="dropbtn">
+        <i class="fa-regular fa-user fa-2x"></i>
+        <i class="fa-solid fa-caret-down" style="margin-left: 5px"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="/edit/account"
+          ><i class="fa-solid fa-pen-to-square"></i> Edit Account</a
+        >
+        <button
+          class="logout-btn"
+          (click)="onLogout()"
+          *ngIf="userIsAuthenticated"
+        >
+          Logout <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <i class="fa-regular fa-user fa-2x" *ngIf="!userIsAuthenticated"></i>
+  <nav class="register d-flex" *ngIf="!userIsAuthenticated">
     <a routerLink="login" *ngIf="!userIsAuthenticated">login</a>
     <a routerLink="register" *ngIf="!userIsAuthenticated">Register</a>
-    <button class="logout-btn" (click)="onLogout()" *ngIf="userIsAuthenticated">
-      Logout <i class="fa-solid fa-right-from-bracket"></i>
-    </button>
   </nav>
 </header>
 

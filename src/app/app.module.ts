@@ -19,7 +19,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProductsComponent } from './products/products.component';
 import { AdminComponent } from './admin/admin.components';
 import { AdminHeader } from './admin/admin-header/admin-header.component';
-
+import { EditAccountComponent } from './products/edit-account/edit-account.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,8 @@ import { AdminHeader } from './admin/admin-header/admin-header.component';
     SearchFilterPipe,
     LoginComponent,
     RegisterComponent,
-    AdminHeader
+    AdminHeader,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,9 @@ import { AdminHeader } from './admin/admin-header/admin-header.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

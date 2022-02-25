@@ -38,6 +38,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.productsService.addToCart(this.product, +qty)
   }
 
+  onAddToWishList(product: Product) {
+    this.authService.addToWishList(product)
+  }
+
   ngOnDestroy(): void {
     this.isAdminStatusListener.unsubscribe()
   }

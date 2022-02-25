@@ -68,6 +68,27 @@
   background-color: #0044ff;
 }
 
+.addtowishlist {
+  margin-right: auto;
+  margin-left: 10px;
+  margin-top: 5px;
+  background-color: rgb(49, 47, 47);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transform: translateX(-50px);
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.addtowishlist:hover {
+  color: red;
+}
+
+.card:hover .addtowishlist {
+  transform: translateX(0);
+  opacity: 1;
+}
 .no-products {
   text-align: center;
   font-size: 3em;

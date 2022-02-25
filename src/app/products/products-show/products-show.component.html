@@ -66,9 +66,19 @@
         >
           <div *ngIf="products?.length > 0">
             <div class="card">
+              <button
+                *ngIf="!isAdmin"
+                class="addtowishlist"
+                matTooltip="Add To Wish List"
+                matTooltipPosition="right"
+                (click)="onAddToWishList(product)"
+              >
+                <i class="fa-solid fa-heart"></i>
+              </button>
               <p class="notInStock" *ngIf="!product.availability">
                 OUT OF STOCK
               </p>
+
               <a (click)="showProduct(product._id)">
                 <img [src]="product.image" class="card-img-top" alt="..." />
 
@@ -77,6 +87,7 @@
                   <p class="p-price">{{ product.price }} LE</p>
                 </div>
               </a>
+
               <button
                 class="add-to-cart-button"
                 *ngIf="!isAdmin"

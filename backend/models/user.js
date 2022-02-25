@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
+  wishList: [{type: mongoose.Schema.Types.ObjectId, ref: 'Component', required: true}],
   roles: {
     type: [{
         type: String,

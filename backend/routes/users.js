@@ -61,16 +61,39 @@ router.post('/login', (req, res, next) => {
         'secret_this_should_be_longer',
         {expiresIn: '1h'}
       )
+
       res.status(200).json({
         token: token,
         expiresIn: 3600,
         role: fetchedUser.roles,
+        userId: fetchedUser._id
       })
     })
     .catch(err => {
       console.log(err)
       return res.status(401).json({message: 'Auth Failed'})
     })
+})
+
+router.post('/addToWishList/:userId', async (req, res, next) => {
+  const user = await User.findOne({_id: req.params.userId}).populate('wishList')
+  let inWishList = false
+  for(let p of user.wishList) {
+    if(p._id.equals(req.body._id)) {
+      inWishList = true
+    }
+  }
+  if(inWishList) {
+    res.json({title: 'Error', message: 'Item Already Exist in Your Wish List'})
+  }
+  else {
+    user.wishList.push(req.body)
+    await user.save()
+    res.status(200).json({title: 'Success', message: 'Item Was Added To Your Wish List'})
+  }
+
+
+  console.log(user.wishList)
 })
 
 

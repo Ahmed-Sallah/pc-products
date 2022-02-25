@@ -21,6 +21,7 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
   search = ''
   isAdmin = false
 
+
   constructor(private authService: AuthService, private productsService: ProductsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -62,6 +63,9 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
     this.productsService.addToCart(product, 1)
   }
 
+  onAddToWishList(product: Product) {
+    this.authService.addToWishList(product)
+  }
 
   ngOnDestroy(): void {
     this.productSub.unsubscribe()

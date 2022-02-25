@@ -9,7 +9,6 @@ export class AdminPageGuard implements CanActivate{
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const isAdmin = this.authService.getIsAdmin()
-    console.log(isAdmin)
     if(!isAdmin) {
       this.router.navigate([''])
     }
