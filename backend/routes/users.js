@@ -83,7 +83,7 @@ router.get('/user-data/:userId', (req, res, next) => {
     })
 })
 
-router.post('/edit-account/:userId', (req, res, next) => {
+router.put('/edit-account/:userId', (req, res, next) => {
   User.findOne({_id: req.params.userId})
     .then(user => {
       user.firstName = req.body.firstName
@@ -93,8 +93,41 @@ router.post('/edit-account/:userId', (req, res, next) => {
       return user.save()
     }).then(result => {
       console.log(result)
-      res.status(200).json({message: 'Updated Account'})
+      res.status(200).json({message: 'Updated Account Info'})
     })
+
+})
+
+router.put('/change-pass/:userId', (req, res, next) => {
+  let fetchedUser
+  if(req.body.newPass !== req.body.confNewPass) {
+    res.json({title: 'Error', message: 'Passwords Does Not Match'})
+  }else {
+    User.findOne({_id: req.params.userId})
+    .then(user => {
+      fetchedUser = user
+      return bcrypt.compare(req.body.currPass, user.password)
+    }).then(result => {
+      if(!result) {
+        res.json({title: 'Error', message: 'Wrong Current Password'})
+      }else {
+        return bcrypt.hash(req.body.newPass, 10)
+      }
+    }).then(result => {
+      if(!result) {
+        res.json({title: 'Error', message: "Could Not Update Your Password"})
+      }else {
+        fetchedUser.password = result
+        return fetchedUser.save()
+      }
+    }).then(result => {
+      console.log(result)
+      res.json({title: 'Success', message: 'Successfully Updated Your Password'})
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
 
 })
 

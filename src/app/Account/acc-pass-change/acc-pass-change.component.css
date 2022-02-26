@@ -1,7 +1,7 @@
 .container-fluid,
 .row {
   height: 100%;
-  margin-top: 200px;
+  margin-top: 10px;
 }
 
 .card {
@@ -61,7 +61,7 @@ p {
   color: rgb(235, 31, 31);
 }
 
-.register-btn {
+.confirm-btn {
   background-color: #3a6cf4;
   color: white;
   padding: 10px 20px;
@@ -72,17 +72,10 @@ p {
   transition: 0.3s;
 }
 
-.register-btn:hover:not([disabled]) {
+.confirm-btn:hover:not([disabled]) {
   background-color: #0044ff;
 }
 
-.register-btn:disabled {
+.confirm-btn:disabled {
   opacity: 0.7;
-}
-
-.login-link {
-  color: #0044ff;
-  font-size: 1.1em;
-  margin-left: 1em;
-  text-decoration: none;
 }

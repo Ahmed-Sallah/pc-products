@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+      <div class="card">
+        <p class="title">Change Password</p>
+        <form (submit)="onChangePass(changePassForm)" #changePassForm="ngForm">
+          <label>Current Password</label>
+          <input
+            type="password"
+            name="currentPass"
+            ngModel
+            #currentPass="ngModel"
+            required
+          />
+          <p *ngIf="currentPass.invalid && currentPass.touched">
+            Please Enter Your Password.
+          </p>
+          <label>New Password</label>
+          <input
+            type="password"
+            name="newPass"
+            ngModel
+            #newPass="ngModel"
+            minlength="5"
+            required
+          />
+          <p *ngIf="newPass.invalid && newPass.touched">
+            Please Enter a Valid New Password. (Length > 4)
+          </p>
+          <label>Confirm New Password</label>
+          <input
+            type="password"
+            name="confirmNewPass"
+            ngModel
+            #confirmNewPass="ngModel"
+            required
+          />
+          <p *ngIf="newPass.value !== confirmNewPass.value">
+            Password Does Not Match
+          </p>
+
+          <button
+            class="confirm-btn"
+            type="submit"
+            [disabled]="changePassForm.invalid"
+          >
+            Confirm
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

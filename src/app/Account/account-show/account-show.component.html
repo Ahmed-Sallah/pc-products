@@ -4,12 +4,12 @@
       <div class="card">
         <p class="title">Account Info</p>
         <div class="name-wraper">
-          <p class="firstName">First Name: {{ userData.firstName }}</p>
-          <p class="lastName">Last Name: {{ userData.lastName }}</p>
+          <p class="firstName">First Name: {{ userData?.firstName }}</p>
+          <p class="lastName">Last Name: {{ userData?.lastName }}</p>
         </div>
         <div class="email-phone-wraper">
-          <p class="email">Email: {{ userData.email }}</p>
-          <p class="phone">Phone: {{ userData.phone }}</p>
+          <p class="email">Email: {{ userData?.email }}</p>
+          <p class="phone">Phone: {{ userData?.phone }}</p>
         </div>
         <a routerLink="/account/edit" class="gotoedit">Edit</a>
       </div>

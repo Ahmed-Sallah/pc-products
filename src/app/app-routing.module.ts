@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccPassChangeComponent } from './Account/acc-pass-change/acc-pass-change.component';
 import { EditAccountComponent } from './Account/account-edit/account-edit.component';
 import { ShowAccountComponent } from './Account/account-show/account-show.component';
 import { AccountComponent } from './Account/account.component';
@@ -40,7 +41,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'info', component: ShowAccountComponent},
-      {path: 'edit', component: EditAccountComponent}
+      {path: 'edit', component: EditAccountComponent},
+      {path: 'change-pass', component: AccPassChangeComponent}
     ]
   },
   {path: 'login', component: LoginComponent},

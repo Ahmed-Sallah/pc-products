@@ -27,6 +27,7 @@ import { AccountComponent } from './Account/account.component';
 import { EditAccountComponent } from './Account/account-edit/account-edit.component';
 import { SideNavComponent } from './Account/sideNav/sidenav.component';
 import { ShowAccountComponent } from './Account/account-show/account-show.component';
+import { AccPassChangeComponent } from './Account/acc-pass-change/acc-pass-change.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { ShowAccountComponent } from './Account/account-show/account-show.compon
     AccountComponent,
     EditAccountComponent,
     ShowAccountComponent,
-    SideNavComponent
+    SideNavComponent,
+    AccPassChangeComponent
   ],
   imports: [
     BrowserModule,

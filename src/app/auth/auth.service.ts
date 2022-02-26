@@ -79,10 +79,22 @@ export class AuthService {
   }
 
   editAccount(userData: UserData) {
-    this.http.post('http://localhost:3000/edit-account/' + this.userId, userData)
+    this.http.put('http://localhost:3000/edit-account/' + this.userId, userData)
       .subscribe(response => {
         this.notifyService.showSuccess('Success', 'Successfully Edited Your Account')
         this.router.navigate(['account', 'info'])
+      })
+  }
+
+  changePassword(currPass: string, newPass: string, confNewPass: string) {
+    const passwords = {currPass, newPass, confNewPass}
+    this.http.put<{title: string, message: string}>('http://localhost:3000/change-pass/' + this.userId, passwords)
+      .subscribe(response => {
+        if(response.title === 'Success') {
+          this.notifyService.showSuccess(response.title, response.message)
+        } else {
+          this.notifyService.showError(response.title, response.message)
+        }
       })
   }
 
@@ -179,7 +191,6 @@ export class AuthService {
     } else {
       this.http.post<{message: string, title: string}>('http://localhost:3000/addToWishList/' + this.userId, product)
         .subscribe(response => {
-          console.log(response.title)
           if(response.title === 'Success') {
             this.notifyService.showSuccess(response.title, response.message)
           }else if(response.title === 'Error'){
