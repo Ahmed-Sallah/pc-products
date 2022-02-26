@@ -19,10 +19,14 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProductsComponent } from './products/products.component';
 import { AdminComponent } from './admin/admin.components';
 import { AdminHeader } from './admin/admin-header/admin-header.component';
-import { EditAccountComponent } from './products/edit-account/edit-account.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { ToastrModule } from 'ngx-toastr';
 import { WishListComponent } from './products/wish-list/wish-list.component';
+import { AccountComponent } from './Account/account.component';
+import { EditAccountComponent } from './Account/account-edit/account-edit.component';
+import { SideNavComponent } from './Account/sideNav/sidenav.component';
+import { ShowAccountComponent } from './Account/account-show/account-show.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,8 +41,11 @@ import { WishListComponent } from './products/wish-list/wish-list.component';
     LoginComponent,
     RegisterComponent,
     AdminHeader,
+    WishListComponent,
+    AccountComponent,
     EditAccountComponent,
-    WishListComponent
+    ShowAccountComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,7 @@ import { WishListComponent } from './products/wish-list/wish-list.component';
     HttpClientModule,
     MatDialogModule,
     MatTooltipModule,
+    MatSidenavModule,
     ToastrModule.forRoot()
   ],
   providers: [],

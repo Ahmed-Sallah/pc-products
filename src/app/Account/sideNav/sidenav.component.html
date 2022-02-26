@@ -1,0 +1,26 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side" position="start">
+    <ul>
+      <li>
+        <a routerLink="/account/info"
+          >Account <i class="fa-solid fa-circle-user"></i
+        ></a>
+      </li>
+      <li>
+        <a routerLink="/account/edit"
+          >Edit Account <i class="fa-solid fa-pen-to-square"></i
+        ></a>
+      </li>
+      <li>
+        <a routerLink="">Change Password <i class="fa-solid fa-key"></i></a>
+      </li>
+    </ul>
+  </mat-drawer>
+
+  <div>
+    <button type="button" class="toggle-btn" (click)="drawer.toggle()">
+      <i class="fa-solid fa-arrow-right-long fa-2x" *ngIf="!drawer.opened"></i>
+      <i class="fa-solid fa-arrow-left fa-2x" *ngIf="drawer.opened"></i>
+    </button>
+  </div>
+</mat-drawer-container>

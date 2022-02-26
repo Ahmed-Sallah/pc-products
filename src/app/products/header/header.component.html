@@ -28,12 +28,13 @@
         <i class="fa-solid fa-caret-down" style="margin-left: 5px"></i>
       </button>
       <div class="dropdown-content">
+        <a routerLink="/account"
+          ><i class="fa-brands fa-battle-net"></i> Account</a
+        >
         <a routerLink="/wish-list"
           ><i class="fa-solid fa-heart"></i> View Wish List</a
         >
-        <a routerLink="/edit/account"
-          ><i class="fa-solid fa-pen-to-square"></i> Edit Account</a
-        >
+
         <button
           class="logout-btn"
           (click)="onLogout()"
@@ -45,6 +46,7 @@
     </div>
   </div>
 
+  <i class="fa-regular fa-user fa-2x" *ngIf="!userIsAuthenticated"></i>
   <nav class="register d-flex" *ngIf="!userIsAuthenticated">
     <a routerLink="login" *ngIf="!userIsAuthenticated">login</a>
     <a routerLink="register" *ngIf="!userIsAuthenticated">Register</a>
@@ -53,7 +55,7 @@
 
 <div class="second-nav">
   <div class="dropdown-category">
-    <button class="dropbtn-category">
+    <button class="dropbtn-category" routerLink="/products/motherboards">
       <i class="fa-solid fa-align-justify"></i> CATEGORIES
       <i class="fa-solid fa-caret-down"></i>
     </button>

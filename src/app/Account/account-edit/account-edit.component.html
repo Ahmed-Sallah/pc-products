@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+      <div class="card">
+        <p class="title">Edit Account Info</p>
+        <form (submit)="onEdit(editForm)" #editForm="ngForm">
+          <label>First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            #firstName="ngModel"
+            ngModel="{{ userData?.firstName }}"
+            required
+          />
+          <p *ngIf="firstName.invalid && firstName.touched">
+            Please Enter a Valid Name.
+          </p>
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            #lastName="ngModel"
+            ngModel="{{ userData?.lastName }}"
+            required
+          />
+          <p *ngIf="lastName.invalid && lastName.touched">
+            Please Enter a Valid Name.
+          </p>
+
+          <label>E-Mail Address</label>
+          <input
+            type="text"
+            name="email"
+            #emailInput="ngModel"
+            ngModel="{{ userData?.email }}"
+            required
+            email
+          />
+          <p *ngIf="emailInput.invalid && emailInput.touched">
+            Please Enter a Valid Email.
+          </p>
+
+          <label>Telephone</label>
+          <input
+            type="number"
+            name="phone"
+            #phoneInput="ngModel"
+            ngModel="{{ userData?.phone }}"
+            required
+          />
+          <p *ngIf="phoneInput.invalid && phoneInput.touched">
+            Please Enter a Valid Phone Number.
+          </p>
+          <button
+            class="confirm-btn"
+            type="submit"
+            [disabled]="editForm.invalid"
+          >
+            Confirm
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

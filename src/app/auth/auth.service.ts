@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { UserData } from "../Account/userData.model";
 import { NotificationService } from "../Notification/notification.service";
 import { Product } from "../products/product.model";
 import { AuthData } from "./auth-data.model";
@@ -71,6 +72,18 @@ export class AuthService {
 
   getIsAdminStatusListener() {
     return this.isAdminStatusListener.asObservable()
+  }
+
+  getUserData() {
+    return this.http.get<{userData: UserData}>('http://localhost:3000/user-data/' + this.userId)
+  }
+
+  editAccount(userData: UserData) {
+    this.http.post('http://localhost:3000/edit-account/' + this.userId, userData)
+      .subscribe(response => {
+        this.notifyService.showSuccess('Success', 'Successfully Edited Your Account')
+        this.router.navigate(['account', 'info'])
+      })
   }
 
   logout() {

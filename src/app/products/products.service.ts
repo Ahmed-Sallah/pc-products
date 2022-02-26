@@ -15,6 +15,8 @@ export class ProductsService {
   private filteredProducts = new Subject<Product[]>()
   private cartListener = new Subject<{_id: string, name: string, price: number, qty: number, image: string, brand: string}[]>()
   private cartList: {_id: string, name: string, price: number, qty: number, image: string, brand: string}[] = []
+
+
   constructor(private http: HttpClient, private dialog: MatDialog, private notifyService : NotificationService) {}
 
   getProducts(type: string) {

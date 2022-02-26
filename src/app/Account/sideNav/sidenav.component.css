@@ -1,0 +1,43 @@
+mat-drawer-container {
+  margin-top: 10px;
+  background-color: transparent;
+  pointer-events: inherit;
+  height: 50%;
+}
+
+mat-drawer {
+  background-color: rgb(202, 202, 202);
+  border-left: 6px solid #3a6cf4;
+  padding-right: 40px;
+  border-radius: 0.7em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin-top: 1em;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(88, 88, 88);
+}
+a:hover i {
+  color: black;
+}
+
+.toggle-btn {
+  border: 2px solid #3a6cf4;
+  border-radius: 1em;
+  background-color: white;
+}
+
+.toggle-btn i {
+  color: rgb(49, 47, 47);
+}

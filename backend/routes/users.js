@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
-const user = require('../models/user')
 
 router.post("/register", (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -75,6 +74,30 @@ router.post('/login', (req, res, next) => {
     })
 })
 
+router.get('/user-data/:userId', (req, res, next) => {
+  User.findOne({_id: req.params.userId})
+    .then(user => {
+      res.status(200).json({
+        userData: {firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone}
+      })
+    })
+})
+
+router.post('/edit-account/:userId', (req, res, next) => {
+  User.findOne({_id: req.params.userId})
+    .then(user => {
+      user.firstName = req.body.firstName
+      user.lastName = req.body.lastName
+      user.email = req.body.email
+      user.phone = req.body.phone
+      return user.save()
+    }).then(result => {
+      console.log(result)
+      res.status(200).json({message: 'Updated Account'})
+    })
+
+})
+
 router.post('/addToWishList/:userId', async (req, res, next) => {
   const user = await User.findOne({_id: req.params.userId}).populate('wishList')
   let inWishList = false
@@ -111,7 +134,6 @@ router.delete('/deleteFromWishList/:userId/:itemId', async (req, res, next) => {
     }
   }
   await user.save()
-  console.log(user.wishList)
 
   res.status(200).json({title: 'Success', message: 'Deleted From Wish List'})
 })
