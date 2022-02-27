@@ -24,4 +24,12 @@ export class AdminService {
     return this.productUpdated.asObservable()
   }
 
+
+  deleteProduct(productId: string) {
+    this.http.delete('http://localhost:3000/admin/delete-product/' + productId)
+      .subscribe(response => {
+        this.products = this.products.filter(p => p._id !== productId)
+        this.productUpdated.next([...this.products])
+      })
+  }
 }

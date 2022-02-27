@@ -14,6 +14,12 @@ router.get('/admin/get-products', (req, res, next) => {
     })
 })
 
+router.delete('/admin/delete-product/:productId', (req, res, next) => {
+  Component.deleteOne({_id: req.params.productId})
+    .then(result => {
+      res.status(200).json({message: 'Successfully Deleted'})
+    })
+})
 
 
 module.exports = router

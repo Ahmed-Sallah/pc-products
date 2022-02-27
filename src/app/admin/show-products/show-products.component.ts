@@ -23,8 +23,12 @@ export class ShowProductsComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnDestroy(): void {
+  onDelete(productId: string) {
+    this.adminService.deleteProduct(productId)
+  }
 
+  ngOnDestroy(): void {
+    this.productsListenerSub.unsubscribe()
   }
 
 }

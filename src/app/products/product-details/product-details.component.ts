@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  onAddToCart(qty) {
+  onAddToCart(qty: any) {
     this.productsService.addToCart(this.product, +qty)
   }
 
