@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <div class="row note-row">
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';"
+        >&times;</span
+      >
+      <strong>Note!</strong> You will be contacted to determine the shipping
+      cost and review the order.
+    </div>
+  </div>
+  <div class="row content-row">
+    <div class="col-md-6">
+      <div class="card address-card">
+        <p class="title">Address</p>
+        <hr />
+        <form (submit)="onAddOrder(submitform)" #submitform="ngForm">
+          <label>Governorate</label>
+          <select #governorate="ngModel" name="governorate" ngModel required>
+            <option value="Alexandria">Alexandria</option>
+            <option value="Aswan">Aswan</option>
+            <option value="Asyut">Asyut</option>
+            <option value="Beheira">Beheira</option>
+            <option value="Beni Suef">Beni Suef</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Dakahlia">Dakahlia</option>
+            <option value="Damietta">Damietta</option>
+            <option value="Faiyum">Faiyum</option>
+            <option value="Gharbia">Gharbia</option>
+            <option value="Giza">Giza</option>
+            <option value="Ismailia">Ismailia</option>
+            <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+            <option value="Luxor">Luxor</option>
+            <option value="Matruh">Matruh</option>
+            <option value="Minya">Minya</option>
+            <option value="Mounfia">Mounfia</option>
+            <option value="New Valley">New Valley</option>
+            <option value="North Sinai">North Sinai</option>
+            <option value="Port Sinai">Port Sinai</option>
+            <option value="Port Said">Port Said</option>
+            <option value="Qalyubia">Qalyubia</option>
+            <option value="Qena">Qena</option>
+            <option value="Red Sea">Red Sea</option>
+            <option value="Sharqia">Sharqia</option>
+            <option value="Sohag">Sohag</option>
+            <option value="South Sinai">South Sinai</option>
+            <option value="Suez">Suez</option>
+          </select>
+          <p *ngIf="governorate.invalid && governorate.touched" class="error">
+            Please Enter a Valid Governorate
+          </p>
+          <label>Area Name</label>
+          <input
+            type="text"
+            #areaName="ngModel"
+            name="areaName"
+            ngModel
+            required
+          />
+          <p *ngIf="areaName.invalid && areaName.touched" class="error">
+            Please Enter a Valid Area Name
+          </p>
+          <label>Street Name</label>
+          <input
+            type="text"
+            #streetName="ngModel"
+            name="streetName"
+            ngModel
+            required
+          />
+          <p *ngIf="streetName.invalid && streetName.touched" class="error">
+            Please Enter a Valid street Name
+          </p>
+          <button
+            type="submit"
+            [disabled]="submitform.invalid"
+            class="confirm-btn"
+          >
+            Confirm Order
+          </button>
+        </form>
+        <p class="payment">Payment Method: Cash On Delivery</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card cart-card">
+        <p class="title">Cart</p>
+        <p class="noItemsInCart" *ngIf="items?.length < 1">
+          Your shopping cart is empty!
+        </p>
+        <div class="card item-card" *ngFor="let item of items">
+          <hr />
+          <div class="row">
+            <div class="col-md-4">
+              <img src="{{ item.image }}" class="img-fluid" alt="" />
+            </div>
+            <div class="col-md-8">
+              <p class="name">{{ item.name }}</p>
+              <p class="brand">Brand: {{ item.brand }}</p>
+              <p class="qty">X {{ item.qty }}</p>
+              <p class="price">{{ item.price * item.qty }} LE</p>
+            </div>
+            <button class="delete" (click)="onDeleteFromCart(item)">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

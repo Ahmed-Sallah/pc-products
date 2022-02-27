@@ -28,6 +28,7 @@ import { EditAccountComponent } from './Account/account-edit/account-edit.compon
 import { SideNavComponent } from './Account/sideNav/sidenav.component';
 import { ShowAccountComponent } from './Account/account-show/account-show.component';
 import { AccPassChangeComponent } from './Account/acc-pass-change/acc-pass-change.component';
+import { CheckoutPageComponent } from './products/checkout-page/checkout-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { AccPassChangeComponent } from './Account/acc-pass-change/acc-pass-chang
     EditAccountComponent,
     ShowAccountComponent,
     SideNavComponent,
-    AccPassChangeComponent
+    AccPassChangeComponent,
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,

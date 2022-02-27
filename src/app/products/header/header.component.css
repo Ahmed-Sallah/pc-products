@@ -251,7 +251,20 @@ header {
   background-color: #0044ff;
 }
 
-.viewcart-btn {
+.checkout-btn {
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 0px 10px 190px;
+  border-radius: 1.5em;
+  background-color: #3a6cf4;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.checkout-btn:hover {
+  background-color: #0044ff;
 }
 
 .dropbtn {

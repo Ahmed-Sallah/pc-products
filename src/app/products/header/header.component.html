@@ -131,7 +131,10 @@
           </div>
         </div>
       </div>
-      <button *ngIf="items?.length > 0" class="viewcart-btn">View Cart</button>
+
+      <a *ngIf="items?.length > 0" class="checkout-btn" routerLink="/checkout">
+        <i class="fa-solid fa-money-bill"></i> Checkout</a
+      >
     </div>
   </div>
 </div>

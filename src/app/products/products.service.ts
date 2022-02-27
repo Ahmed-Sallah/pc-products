@@ -2,7 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { AuthService } from "../auth/auth.service";
 import { AddToCartDialog } from "../CartDialog/addToCartDialog.component";
 import { NotificationService } from "../Notification/notification.service";
 import { Product } from "./product.model";
@@ -17,7 +19,7 @@ export class ProductsService {
   private cartList: {_id: string, name: string, price: number, qty: number, image: string, brand: string}[] = []
 
 
-  constructor(private http: HttpClient, private dialog: MatDialog, private notifyService : NotificationService) {}
+  constructor(private http: HttpClient, private dialog: MatDialog, private notifyService : NotificationService, private authService: AuthService, private router: Router) {}
 
   getProducts(type: string) {
     this.http.get<{message: string, products: Product[]}>('http://localhost:3000/products/' + type)
@@ -152,6 +154,18 @@ export class ProductsService {
     this.cartListener.next([...this.cartList])
     this.notifyService.showSuccess('Deleted', 'Successfully deleted from cart')
 
+  }
+
+  addOrder(address: {gover: string, area: string, street: string}, items: {_id: string, name: string, price: number, qty: number, image: string}[]) {
+    const userId = this.authService.getUserId()
+    this.http.post('http://localhost:3000/add-order', {address, items, userId})
+      .subscribe(response => {
+        this.notifyService.showSuccess('Thanks For Your Order!', "We Will Contact You")
+        this.cartList = []
+        this.cartListener.next([...this.cartList])
+        localStorage.setItem('cart', JSON.stringify(this.cartList))
+        this.router.navigate(['home'])
+      })
   }
 
 }

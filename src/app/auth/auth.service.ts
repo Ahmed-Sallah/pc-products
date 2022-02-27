@@ -78,6 +78,10 @@ export class AuthService {
     return this.http.get<{userData: UserData}>('http://localhost:3000/user-data/' + this.userId)
   }
 
+  getUserId() {
+    return this.userId
+  }
+
   editAccount(userData: UserData) {
     this.http.put('http://localhost:3000/edit-account/' + this.userId, userData)
       .subscribe(response => {
@@ -92,6 +96,7 @@ export class AuthService {
       .subscribe(response => {
         if(response.title === 'Success') {
           this.notifyService.showSuccess(response.title, response.message)
+          this.router.navigate(['account', 'info'])
         } else {
           this.notifyService.showError(response.title, response.message)
         }

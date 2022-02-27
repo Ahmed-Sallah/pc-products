@@ -9,6 +9,7 @@ import { AdminPageGuard } from './auth/AdminPageGuard.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { CheckoutPageComponent } from './products/checkout-page/checkout-page.component';
 import { HomeComponent } from './products/home/home.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductsShowComponent } from './products/products-show/products-show.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
       {path: 'products/:type', component: ProductsShowComponent},
       {path: 'products/:type/:id', component: ProductDetailsComponent},
       {path: 'wish-list', component: WishListComponent, canActivate: [AuthGuard]},
+      {path: 'checkout', component: CheckoutPageComponent, canActivate: [AuthGuard]},
     ]
   },
   {
