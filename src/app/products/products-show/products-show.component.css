@@ -23,6 +23,7 @@
   text-align: center;
   margin: 2em auto;
   border: 2px solid;
+  min-height: 550px;
   border-radius: 10px;
   transition: 0.3s;
   align-items: center;
@@ -55,6 +56,7 @@
 .add-to-cart-button {
   background-color: #3a6cf4;
   color: white;
+  margin-top: auto;
   margin-bottom: 1em;
   padding: 10px 20px;
   font-size: 16px;

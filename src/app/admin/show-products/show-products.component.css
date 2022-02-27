@@ -1,0 +1,77 @@
+.search-form {
+  margin: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.search-input {
+  width: 40%;
+  border: none;
+  border-radius: 1em;
+  outline: none;
+  padding-left: 15px;
+}
+
+.card {
+  background-color: #303030;
+  width: 20em;
+  text-align: center;
+  margin: 2em auto;
+  border: 2px solid;
+  min-height: 550px;
+  border-radius: 10px;
+  transition: 0.3s;
+  align-items: center;
+}
+.card a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.card-img-top {
+  padding: 2em;
+}
+
+.p-name {
+  font-size: 1em;
+  font-weight: 500;
+  color: white;
+}
+
+.p-price {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: white;
+}
+
+.p-available,
+.p-notavailable {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+.p-available span {
+  color: green;
+  font-weight: 600;
+}
+
+.p-notavailable span {
+  color: red;
+  font-weight: 600;
+}
+
+.edit-btn {
+  display: inline-block;
+  background-color: #3a6cf4;
+  padding: 10px 20px;
+  border-radius: 1em;
+  margin: 0px 50px 10px 0px;
+}
+.delete-btn {
+  border: none;
+  color: white;
+  background-color: red;
+  padding: 10px;
+  border-radius: 1em;
+}
