@@ -16,7 +16,7 @@
     <a href="https://web.whatsapp.com/send?phone=201067721955" target="_blank"
       ><i class="fa-solid fa-phone"></i> NEED HELP?</a
     >
-    <a [routerLink]="['admin']" *ngIf="isAdmin"
+    <a [routerLink]="['admin', 'orders']" *ngIf="isAdmin"
       ><i class="fa-solid fa-screwdriver-wrench"></i> Admin Tool</a
     >
   </nav>
@@ -31,7 +31,7 @@
         <a routerLink="/account/info"
           ><i class="fa-brands fa-battle-net"></i> Account</a
         >
-        <a routerLink="/wish-list"
+        <a routerLink="/wish-list" *ngIf="!isAdmin"
           ><i class="fa-solid fa-heart"></i> View Wish List</a
         >
 

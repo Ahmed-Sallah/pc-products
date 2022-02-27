@@ -92,7 +92,7 @@ export class AuthService {
 
   changePassword(currPass: string, newPass: string, confNewPass: string) {
     const passwords = {currPass, newPass, confNewPass}
-    this.http.put<{title: string, message: string}>('http://localhost:3000/change-pass/' + this.userId, passwords)
+    this.http.post<{title: string, message: string}>('http://localhost:3000/change-pass/' + this.userId, passwords)
       .subscribe(response => {
         if(response.title === 'Success') {
           this.notifyService.showSuccess(response.title, response.message)

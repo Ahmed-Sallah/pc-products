@@ -36,7 +36,7 @@ router.post("/register", (req, res, next) => {
           })
         }).catch(err => {
           res.status(500).json({
-            error: err
+            message: 'Invalid Authentication credentials'
           })
         })
     })
@@ -47,13 +47,13 @@ router.post('/login', (req, res, next) => {
   User.findOne({email: req.body.email})
     .then(user => {
       if(!user) { // if email does not exist
-        return res.status(401).json({message: 'Auth Failed'})
+        return res.status(401).json({message: 'Wrong Email Or Password!'})
       }
       fetchedUser = user
       return bcrypt.compare(req.body.password, user.password) // if email exists compare password
     }).then(result => {
       if(!result) { // if compare is false
-        return res.status(401).json({message: 'Auth Failed'})
+        return res.status(401).json({message: 'Wrong Email Or Password!'})
       }
       const token = jwt.sign( // if compare is true then make the token
         {email: fetchedUser.email, userId: fetchedUser._id},
@@ -69,8 +69,7 @@ router.post('/login', (req, res, next) => {
       })
     })
     .catch(err => {
-      console.log(err)
-      return res.status(401).json({message: 'Auth Failed'})
+      res.status(401).json({message: 'Wrong Email Or Password!'})
     })
 })
 
@@ -98,7 +97,7 @@ router.put('/edit-account/:userId', (req, res, next) => {
 
 })
 
-router.put('/change-pass/:userId', (req, res, next) => {
+router.post('/change-pass/:userId', async (req, res, next) => {
   let fetchedUser
   if(req.body.newPass !== req.body.confNewPass) {
     res.json({title: 'Error', message: 'Passwords Does Not Match'})
@@ -121,14 +120,11 @@ router.put('/change-pass/:userId', (req, res, next) => {
         return fetchedUser.save()
       }
     }).then(result => {
-      console.log(result)
       res.json({title: 'Success', message: 'Successfully Updated Your Password'})
     }).catch(err => {
       console.log(err)
     })
   }
-
-
 })
 
 router.post('/addToWishList/:userId', async (req, res, next) => {

@@ -8,7 +8,7 @@ import { HeaderComponent } from './products/header/header.component';
 import { ProductsShowComponent } from './products/products-show/products-show.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { HomeComponent } from './products/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ProductsComponent } from './products/products.component';
 import { AdminComponent } from './admin/admin.components';
-import { AdminHeader } from './admin/admin-header/admin-header.component';
+import { AdminSideNav } from './admin/admin-sideNav/admin-sideNav.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ToastrModule } from 'ngx-toastr';
@@ -29,6 +29,11 @@ import { SideNavComponent } from './Account/sideNav/sidenav.component';
 import { ShowAccountComponent } from './Account/account-show/account-show.component';
 import { AccPassChangeComponent } from './Account/acc-pass-change/acc-pass-change.component';
 import { CheckoutPageComponent } from './products/checkout-page/checkout-page.component';
+import { ShowOrdersComponent } from './admin/show-orders/show-orders.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { ShowProductsComponent } from './admin/show-products/show-products.component';
+import { ShowAccountsComponent } from './admin/show-accounts/show-accounts.component';
+import { ErrorInterceptor } from './error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,14 +47,18 @@ import { CheckoutPageComponent } from './products/checkout-page/checkout-page.co
     SearchFilterPipe,
     LoginComponent,
     RegisterComponent,
-    AdminHeader,
+    AdminSideNav,
     WishListComponent,
     AccountComponent,
     EditAccountComponent,
     ShowAccountComponent,
     SideNavComponent,
     AccPassChangeComponent,
-    CheckoutPageComponent
+    CheckoutPageComponent,
+    ShowOrdersComponent,
+    AddProductComponent,
+    ShowProductsComponent,
+    ShowAccountsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +71,9 @@ import { CheckoutPageComponent } from './products/checkout-page/checkout-page.co
     MatSidenavModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AddToCartDialog]
 })
