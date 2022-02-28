@@ -15,11 +15,29 @@ router.get('/admin/get-products', (req, res, next) => {
     })
 })
 
+router.get('/admin/get-product/:id', (req, res, next) => {
+  Component.findById(req.params.id).then(product => {
+    if(product) {
+      res.status(200).json(product)
+    } else {
+      res.status(404).json({meessage: 'Post Not Found'})
+    }
+  })
+})
+
 router.post('/admin/add-product', (req, res, next) => {
   const product = new Component({type: req.body.type, name: req.body.name, price: req.body.price, brand: req.body.brand, image: req.body.image, availability: req.body.availability})
   product.save()
     .then(response => {
       res.status(200).json({title: 'Success', message: 'Product Was Added'})
+    })
+})
+
+router.put('/admin/update-product/:id', (req, res, next) => {
+  Component.updateOne({_id: req.params.id}, req.body.product)
+    .then(result => {
+      console.log(result)
+      res.status(200).json({title: 'Success', message: 'Update Successfull'})
     })
 })
 

@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { NotificationService } from "../Notification/notification.service";
 import { Product } from "../products/product.model";
@@ -15,7 +16,7 @@ export class AdminService {
   private accountsUpdated = new Subject<Account[]>()
 
 
-  constructor(private http: HttpClient, private notify: NotificationService) {}
+  constructor(private http: HttpClient, private notify: NotificationService, private router: Router) {}
 
   getProducts() {
     this.http.get<{message: string, products: Product[]}>('http://localhost:3000/admin/get-products')
@@ -23,6 +24,10 @@ export class AdminService {
         this.products = response.products
         this.productUpdated.next([...this.products])
       })
+  }
+
+  getProduct(id: string) {
+    return this.http.get<{product: Product}>('http://localhost:3000/admin/get-product/' + id)
   }
 
   getProductsUpdateListener() {
@@ -36,6 +41,16 @@ export class AdminService {
       })
   }
 
+  updateProduct(id: string, product: Product) {
+    console.log(product)
+    this.http.put<{title: string, message: string}>('http://localhost:3000/admin/update-product/' + id, {product})
+      .subscribe(response => {
+        console.log(response)
+        this.notify.showSuccess(response.title, response.message)
+        this.router.navigate(['admin', 'all-products'])
+      })
+
+  }
 
   deleteProduct(productId: string) {
     this.http.delete<{title: string, message: string}>('http://localhost:3000/admin/delete-product/' + productId)

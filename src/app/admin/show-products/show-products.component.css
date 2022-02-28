@@ -36,13 +36,16 @@
 .p-name {
   font-size: 1em;
   font-weight: 500;
-  color: white;
 }
 
 .p-price {
   font-size: 1.3em;
   font-weight: 700;
-  color: white;
+}
+
+.p-brand {
+  font-size: 1.3em;
+  font-weight: 700;
 }
 
 .p-available,

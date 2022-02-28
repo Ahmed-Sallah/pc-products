@@ -1,16 +1,19 @@
 <div class="container-fluid">
-  <form (submit)="onAddProduct(addform)" #addform="ngForm">
+  <form (submit)="onSaveProduct(addform)" #addform="ngForm">
     <div class="row">
+      <h1 class="text-center" *ngIf="mode === 'edit'">Edit</h1>
+      <h1 class="text-center" *ngIf="mode === 'create'">Create</h1>
+
       <label>Product Name</label>
-      <input type="text" name="name" ngModel required />
+      <input type="text" name="name" [ngModel]="product?.name" required />
       <label>Image Url</label>
-      <input type="text" name="image" ngModel required />
+      <input type="text" name="image" [ngModel]="product?.image" required />
       <label>Product Brand</label>
-      <input type="text" name="brand" ngModel required />
+      <input type="text" name="brand" [ngModel]="product?.brand" required />
       <label>Product Price</label>
-      <input type="number" name="price" ngModel required />
+      <input type="number" name="price" [ngModel]="product?.price" required />
       <label>Product Type</label>
-      <select name="type" ngModel required>
+      <select name="type" [ngModel]="product?.type" required>
         <option value="motherboards">Motherboard</option>
         <option value="cpu">Cpu</option>
         <option value="ram">Ram</option>
@@ -24,12 +27,25 @@
         <option value="accessories">Accessories</option>
       </select>
       <label>Product Availability</label>
-      <select name="availability" ngModel required>
+      <select name="availability" [ngModel]="product?.availability" required>
         <option value="true">In Stock</option>
         <option value="false">Out Of Stock</option>
       </select>
-      <button type="submit" class="add-btn" [disabled]="addform.invalid">
+      <button
+        *ngIf="mode === 'create'"
+        type="submit"
+        class="add-btn"
+        [disabled]="addform.invalid"
+      >
         Add Product
+      </button>
+      <button
+        *ngIf="mode === 'edit'"
+        type="submit"
+        class="add-btn"
+        [disabled]="addform.invalid"
+      >
+        Edit Product
       </button>
     </div>
   </form>

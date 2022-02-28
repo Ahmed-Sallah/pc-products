@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Product } from 'src/app/products/product.model';
 import { AdminService } from '../admin.service';
 
@@ -10,14 +11,39 @@ import { AdminService } from '../admin.service';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor(private adminService: AdminService) { }
+  mode = 'create'
+  private productId: string
+  product: any
+
+  constructor(private adminService: AdminService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if(paramMap.has('id')) {
+        this.mode = 'edit'
+        this.productId = paramMap.get('id')
+        this.adminService.getProduct(this.productId)
+          .subscribe(product => {
+            this.product = product
+          })
+      } else {
+        this.mode = 'create'
+        this.productId = null
+      }
+    })
   }
 
-  onAddProduct(form: NgForm) {
+  onSaveProduct(form: NgForm) {
+    if(form.invalid) {
+      return
+    }
     const product = {name: form.value.name, price: form.value.price, image: form.value.image, brand: form.value.brand, type: form.value.type, availability: form.value.availability}
-    this.adminService.addProduct(product)
+    if(this.mode === 'create') {
+      this.adminService.addProduct(product)
+    } else {
+      this.adminService.updateProduct(this.productId, product)
+    }
+
     form.reset()
   }
 

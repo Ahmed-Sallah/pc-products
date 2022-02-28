@@ -20,6 +20,7 @@
           <div class="card-body">
             <p class="p-name">{{ product.name }}</p>
             <p class="p-price">{{ product.price }} LE</p>
+            <p class="p-brand">{{ product.brand }}</p>
             <p class="p-available" *ngIf="product.availability">
               <span> <i class="fa-solid fa-check"></i> In Stock</span>
             </p>
@@ -28,10 +29,7 @@
             </p>
           </div>
           <div class="buttons-wraper">
-            <a
-              class="edit-btn"
-              routerLink="/admin/add-product/{{ product._id }}"
-            >
+            <a class="edit-btn" routerLink="/admin/edit/{{ product._id }}">
               Edit
             </a>
             <button class="delete-btn" (click)="onDelete(product._id)">

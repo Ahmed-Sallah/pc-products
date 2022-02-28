@@ -26,8 +26,8 @@ const motherboardData = async () => {
 
 const cpuData = async () => {
   await Component.deleteMany({type: 'cpu'})
-  const cpu1 = new Component({type: 'cpu', name: 'AMD RYZEN 5 2600 6-Core 12-Threads (Max Boost 3.9 GHz)', price: 2350, brand: 'AMD', image: 'https://cdn.elbadrgroupeg.store/image/cache/catalog/19-113-496-V01-1280x960.jpg', availability: true})
-  const cpu2 = new Component({type: 'cpu', name: 'AMD RYZEN 3 3100 4-Core 8-Thread (Max Boost 3.9 GHz)', price: 1900, brand: 'AMD', image: 'https://highendstore.net/image/cache/catalog/RYZEN_3_LEFT-1384x1188.png', availability: false})
+  const cpu1 = new Component({type: 'cpu', name: 'AMD RYZEN 5 2600 6-Core 12-Threads (Max Boost 3.9 GHz)', price: 2350, brand: 'Amd', image: 'https://cdn.elbadrgroupeg.store/image/cache/catalog/19-113-496-V01-1280x960.jpg', availability: true})
+  const cpu2 = new Component({type: 'cpu', name: 'AMD RYZEN 3 3100 4-Core 8-Thread (Max Boost 3.9 GHz)', price: 1900, brand: 'Amd', image: 'https://highendstore.net/image/cache/catalog/RYZEN_3_LEFT-1384x1188.png', availability: false})
   const cpu3 = new Component({type: 'cpu', name: 'Intel Core I5-10600 Comet Lake 6-Core 12-Thread (4.8 GHz Turbo)', price: 4000, brand: 'Intel', image: 'https://elyamamastore.com/images/thumbs/000/0002069_intel-core-i5-10600-comet-lake-6-core-33-ghz-lga-1200-65w-desktop-processor-bx8070110600_625.jpeg', availability: true})
   const cpu4 = new Component({type: 'cpu', name: 'Intel Core I7-11700F Rocket Lake 8-Cores 16-Threads (4.9 GHz Turbo)', price: 6700, brand: 'Intel', image: 'https://img-cdn-aws.gputracker.eu/fit-in/500x500/products/503/2037/5032037215572.png?signature=da2b4e13f80b909addd4b45a5ae93dcc7401ec1f3188fa484de1ebe3f8b763e1', availability: false})
   const cpu5 = new Component({type: 'cpu', name: 'Intel Core™ I9-12900K Processor 16 Cores / 24 Threads (30M Cache, Up To 5.20 GHz)', price: 12000 , brand: 'Intel', image: 'https://m.media-amazon.com/images/I/61RnzuOIOoL._AC_SL1002_.jpg', availability: true})
