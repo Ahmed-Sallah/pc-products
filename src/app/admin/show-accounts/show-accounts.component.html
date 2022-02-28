@@ -1,1 +1,38 @@
-<p>show-accounts works!</p>
+<div class="container-fluid">
+  <div class="search-form">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search"
+      [(ngModel)]="search"
+    />
+  </div>
+
+  <div class="row">
+    <table id="customers">
+      <tr>
+        <th class="text-center">Full Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Phone</th>
+        <th class="text-center">Creation Date</th>
+        <th class="text-center">Delete</th>
+      </tr>
+
+      <tr *ngFor="let account of accounts | searchFilter: search">
+        <td>{{ account.firstName }} {{ account.lastName }}</td>
+        <td>{{ account.email }}</td>
+        <td>{{ account.phone }}</td>
+        <td>{{ account.creationDate }}</td>
+        <td class="text-center">
+          <button
+            class="delete-btn"
+            matTooltip="Delete Account"
+            (click)="onDeleteAccount(account._id)"
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

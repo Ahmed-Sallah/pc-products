@@ -1,1 +1,36 @@
-<p>add-product works!</p>
+<div class="container-fluid">
+  <form (submit)="onAddProduct(addform)" #addform="ngForm">
+    <div class="row">
+      <label>Product Name</label>
+      <input type="text" name="name" ngModel required />
+      <label>Image Url</label>
+      <input type="text" name="image" ngModel required />
+      <label>Product Brand</label>
+      <input type="text" name="brand" ngModel required />
+      <label>Product Price</label>
+      <input type="number" name="price" ngModel required />
+      <label>Product Type</label>
+      <select name="type" ngModel required>
+        <option value="motherboards">Motherboard</option>
+        <option value="cpu">Cpu</option>
+        <option value="ram">Ram</option>
+        <option value="ssd">SSD</option>
+        <option value="hdd">HDD</option>
+        <option value="gpu">Gpu</option>
+        <option value="case">Case</option>
+        <option value="psu">psu</option>
+        <option value="fans-cooler">Fans-Cooler</option>
+        <option value="monitor">Monitor</option>
+        <option value="accessories">Accessories</option>
+      </select>
+      <label>Product Availability</label>
+      <select name="availability" ngModel required>
+        <option value="true">In Stock</option>
+        <option value="false">Out Of Stock</option>
+      </select>
+      <button type="submit" class="add-btn" [disabled]="addform.invalid">
+        Add Product
+      </button>
+    </div>
+  </form>
+</div>

@@ -67,11 +67,22 @@
   padding: 10px 20px;
   border-radius: 1em;
   margin: 0px 50px 10px 0px;
+  transition: 0.3s;
 }
+
+.edit-btn:hover {
+  background-color: #0044ff;
+}
+
 .delete-btn {
   border: none;
   color: white;
-  background-color: red;
+  background-color: rgb(187, 57, 57);
   padding: 10px;
   border-radius: 1em;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: red;
 }

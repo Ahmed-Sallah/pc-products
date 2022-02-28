@@ -1,0 +1,49 @@
+.row {
+  padding: 20px 200px;
+}
+label {
+  font-size: 1.5em;
+  font-weight: 500;
+  padding: 0px;
+  margin-top: 20px;
+}
+.col {
+  padding: 0px;
+}
+
+input,
+select {
+  outline: none;
+  border: none;
+  border-radius: 0.7em;
+  height: 35px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.add-btn {
+  background-color: #3a6cf4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin: 20px 0px;
+  width: 10%;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #0044ff;
+}
+
+.add-btn:hover:not([disabled]) {
+  background-color: #0044ff;
+}
+
+.add-btn:disabled {
+  opacity: 0.7;
+}

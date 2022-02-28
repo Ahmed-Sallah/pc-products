@@ -12,5 +12,11 @@ const ComponentSchema = new mongoose.Schema({
   availability: {type: Boolean, required: true}
 })
 
+ComponentSchema.pre('save', function (next) {
+  // Capitalize
+  this.brand = this.brand.trim()[0].toUpperCase() + this.brand.slice(1).toLowerCase();
+  next();
+});
+
 
 module.exports = mongoose.model('Component', ComponentSchema)
