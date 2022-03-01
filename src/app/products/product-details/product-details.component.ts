@@ -22,7 +22,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       const type = params['type']
       this.productsService.getProduct(id, type)
         .subscribe((productData) => {
+
           this.product = productData.product
+
         })
     })
 

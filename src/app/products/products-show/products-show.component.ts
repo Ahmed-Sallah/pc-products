@@ -25,6 +25,7 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private productsService: ProductsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+
     this.route.params.subscribe((params: Params) => {
       const type = params['type']
       this.productsService.getProducts(type)
@@ -49,6 +50,13 @@ export class ProductsShowComponent implements OnInit, OnDestroy {
     .subscribe((products: Product[]) => {
       this.products = products
     })
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+    return value;
   }
 
   showProduct(id: string) {

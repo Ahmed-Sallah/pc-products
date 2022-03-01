@@ -24,3 +24,15 @@ mat-dialog-container {
 mat-dialog-container::-webkit-scrollbar {
   display: none;
 }
+
+.mat-accent .mat-slider-track-fill {
+  background-color: #3a6cf4 !important;
+}
+
+.mat-slider-thumb-label {
+  background-color: #3a6cf4 !important;
+}
+
+.mat-slider-thumb {
+  background-color: #3a6cf4 !important;
+}

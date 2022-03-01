@@ -35,6 +35,7 @@ import { ShowProductsComponent } from './admin/show-products/show-products.compo
 import { ShowAccountsComponent } from './admin/show-accounts/show-accounts.component';
 import { ErrorInterceptor } from './error.interceptor';
 import { OrderDetailsComponent } from './admin/order-details/order-details.component';
+import {MatSliderModule} from '@angular/material/slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +72,7 @@ import { OrderDetailsComponent } from './admin/order-details/order-details.compo
     MatDialogModule,
     MatTooltipModule,
     MatSidenavModule,
+    MatSliderModule,
     ToastrModule.forRoot()
   ],
   providers: [

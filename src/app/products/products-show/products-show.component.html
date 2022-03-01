@@ -20,28 +20,18 @@
               }}</label>
             </div>
             <hr />
-            <p class="filter-stock">Stock Status</p>
-            <input
-              type="checkbox"
-              class="form-check-input"
-              name="inStock"
-              id="inStock"
-              value="inStock"
+            <p class="filter-price">Price</p>
+            <mat-slider
+              thumbLabel
+              [displayWith]="formatLabel"
+              tickInterval="1000"
+              step="1000"
+              min="0"
+              max="100000"
               ngModel
-            />
-            <label class="form-check-label" for="inStock">In Stock</label>
-            <br />
-            <input
-              type="checkbox"
-              class="form-check-input"
-              name="outOfStock"
-              id="outOfStock"
-              ngModel
-              value="outOfStock"
-            />
-            <label class="form-check-label" for="outOfStock"
-              >Out of Stock</label
-            >
+              name="price"
+              aria-label="units"
+            ></mat-slider>
           </div>
           <button type="submit" class="filter-btn">Filter</button>
         </form>

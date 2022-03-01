@@ -38,75 +38,25 @@ export class ProductsService {
   }
 
   filter(form: NgForm, brandList) {
+    console.log(form)
     let filteredList = []
     if(filteredList.length === 0) {
       this.productUpdated.next([...this.products])
     }
     for(let b of brandList) {
       if(form.controls[b].value === true) {
-        if(form.controls['inStock'].value === true) {
-          if(form.controls['outOfStock'].value === true) {
-            filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
-            this.filteredProducts.next([...filteredList])
-          }
-          filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
-          this.filteredProducts.next([...filteredList])
-        }
-        else if(form.controls['outOfStock'].value === true) {
-          if(form.controls['inStock'].value === true) {
-            filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
-            this.filteredProducts.next([...filteredList])
-          }
-          filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
-          this.filteredProducts.next([...filteredList])
-        }
-        else {
+        if(form.controls['price'].value === '') {
           filteredList.push(...this.products.filter(p => p.brand === b))
-          this.filteredProducts.next([...filteredList])
+          this.filteredProducts.next(filteredList)
+        } else {
+          filteredList.push(...this.products.filter(p => p.brand === b && p.price < form.controls['price'].value))
+          this.filteredProducts.next(filteredList)
         }
+
       }
     }
-
-
   }
 
-
-
-    // let filteredList = []
-    // if(filteredList.length === 0) {
-    //   this.productUpdated.next([...this.products])
-    // }
-    // for(let b of brandList) {
-    //   if(form.controls[b].value === true) {
-    //     if(form.controls['inStock'].value === true) {
-    //       if(form.controls['outOfStock'].value === true) {
-    //         filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
-    //         this.filteredProducts.next([...filteredList])
-    //       }
-    //       filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
-    //       this.filteredProducts.next([...filteredList])
-    //       if(filteredList.length === 0) {
-    //         this.filteredProducts.next([])
-    //       }
-    //     }
-    //     else if(form.controls['outOfStock'].value === true) {
-    //       if(form.controls['inStock'].value === true) {
-    //         filteredList.push(...this.products.filter(p => p.brand === b && p.availability === true))
-    //         this.filteredProducts.next([...filteredList])
-    //       }
-    //       filteredList.push(...this.products.filter(p => p.brand === b && p.availability === false))
-    //       this.filteredProducts.next([...filteredList])
-    //       if(filteredList.length === 0) {
-    //         this.filteredProducts.next([])
-    //       }
-    //     }
-    //     else {
-    //       filteredList.push(...this.products.filter(p => p.brand === b))
-    //       this.filteredProducts.next([...filteredList])
-    //     }
-    //   }
-
-    // }
   getFilteredProductsListener() {
     return this.filteredProducts.asObservable()
   }

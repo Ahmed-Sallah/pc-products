@@ -18,6 +18,8 @@ router.get('/products/:type/:id', (req, res, next) => {
   Component.findById(id)
     .then((product) => {
       res.status(200).json({message: 'Product Found', product})
+    }).catch(err => {
+      res.status(404).json({title: 'Error', message: 'Product Not Found'})
     })
 })
 
