@@ -47,3 +47,13 @@ input::-webkit-inner-spin-button {
 .add-btn:disabled {
   opacity: 0.7;
 }
+
+@media (max-width: 1023px) {
+  .row {
+    padding: 40px;
+  }
+
+  .add-btn {
+    width: 30%;
+  }
+}

@@ -1,0 +1,11 @@
+.row,
+.col-md-2,
+.col-md-10 {
+  height: 100%;
+}
+
+@media (max-width: 1023px) {
+  .col-md-2 {
+    height: 40%;
+  }
+}

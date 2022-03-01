@@ -9,7 +9,7 @@
   border: none;
   border-radius: 1em;
   outline: none;
-  padding-left: 15px;
+  padding: 10px;
 }
 
 .card {
@@ -88,4 +88,10 @@
 
 .delete-btn:hover {
   background-color: red;
+}
+
+@media (max-width: 1023px) {
+  .search-input {
+    width: 70%;
+  }
 }

@@ -91,7 +91,6 @@ router.put('/edit-account/:userId', (req, res, next) => {
       user.phone = req.body.phone
       return user.save()
     }).then(result => {
-      console.log(result)
       res.status(200).json({message: 'Updated Account Info'})
     })
 

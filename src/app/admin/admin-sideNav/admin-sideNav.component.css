@@ -24,3 +24,12 @@ ul li a {
 ul li a:hover {
   color: rgb(168, 168, 168);
 }
+
+@media (max-width: 1023px) {
+  .mat-drawer {
+    width: 36%;
+  }
+  .mat-drawer-content {
+    width: 70%;
+  }
+}

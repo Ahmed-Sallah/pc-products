@@ -37,7 +37,6 @@ router.post('/admin/add-product', (req, res, next) => {
 router.put('/admin/update-product/:id', (req, res, next) => {
   Component.updateOne({_id: req.params.id}, req.body.product)
     .then(result => {
-      console.log(result)
       res.status(200).json({title: 'Success', message: 'Update Successfull'})
     })
 })
@@ -73,7 +72,6 @@ router.get('/admin/get-orders', (req, res, next) => {
 router.get('/admin/get-order/:id', (req, res, next) => {
   Order.findById(req.params.id).populate('user')
     .then(order => {
-      console.log(order)
       res.status(200).json(order)
     })
 })

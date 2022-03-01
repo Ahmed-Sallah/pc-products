@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="no-items" *ngIf="wishListItems.length < 1">
+    <div class="no-items" *ngIf="wishListItems?.length < 1">
       Your Wish List is Empty
     </div>
     <div class="col-md-3" *ngFor="let item of wishListItems">
