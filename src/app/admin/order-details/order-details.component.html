@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <h1 class="title">Address</h1>
+        <p>Governorate: {{ order?.address.governorate }}</p>
+        <p>Area: {{ order?.address.area }}</p>
+        <p>Street: {{ order?.address.street }}</p>
+        <hr />
+        <h1 class="title">User</h1>
+        <p>Name: {{ order?.user.firstName }} {{ order?.user.lastName }}</p>
+        <p>Email: {{ order?.user.email }}</p>
+        <p>Phone: {{ order?.user.phone }}</p>
+        <hr />
+        <p>Order Date: {{ order?.orderDate }}</p>
+        <p>Total Price: {{ totalPrice }} LE</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card order-card">
+        <h1 class="title">Order</h1>
+        <div class="card item-card" *ngFor="let item of order?.items">
+          <div class="row">
+            <div class="col-md-4">
+              <img [src]="item.image" class="img-fluid img" />
+            </div>
+            <div class="col-md-8 text-center">
+              <p>{{ item.name }}</p>
+              <p>{{ item.brand }}</p>
+              <p>{{ item.price }} LE</p>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="order-btn" (click)="onDeleteOrder()">Order Completed</button>
+</div>

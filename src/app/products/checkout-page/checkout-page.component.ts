@@ -13,6 +13,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
   private cartListenerSub: Subscription
   items: {_id: string, name: string, price: number, qty: number, image: string, brand: string}[]
+  totalPrice: number = 0
 
   constructor(private productsService: ProductsService, private router: Router) { }
 
@@ -25,6 +26,10 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         this.router.navigate(['products', 'motherboards'])
       }
     })
+    console.log(this.items)
+    for(let item of this.items) {
+      this.totalPrice += item.price
+    }
   }
 
   onAddOrder(form: NgForm) {

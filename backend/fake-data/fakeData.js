@@ -70,7 +70,7 @@ const ssdData = async () => {
   await ssd4.save()
 }
 
-motherboardData()
+cpuData()
   .then(() => {
     mongoose.connection.close()
   })

@@ -1,1 +1,31 @@
-<p>show-orders works!</p>
+<div class="container-fluid">
+  <div class="search-form">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search"
+      [(ngModel)]="search"
+    />
+  </div>
+
+  <div class="row">
+    <h1 class="text-center" *ngIf="orders?.length < 1">No Orders</h1>
+
+    <table id="table" *ngIf="orders?.length > 0">
+      <tr>
+        <th>Order By</th>
+        <th>Order Address</th>
+        <th>Order Date</th>
+      </tr>
+
+      <tr
+        *ngFor="let order of orders | searchFilter: search"
+        routerLink="/admin/orders/{{ order._id }}"
+      >
+        <td>{{ order.user.firstName }} {{ order.user.lastName }}</td>
+        <td>{{ order.address.governorate }}</td>
+        <td>{{ order.orderDate }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { ShowAccountComponent } from './Account/account-show/account-show.compon
 import { AccountComponent } from './Account/account.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { AdminComponent } from './admin/admin.components';
+import { OrderDetailsComponent } from './admin/order-details/order-details.component';
 import { ShowAccountsComponent } from './admin/show-accounts/show-accounts.component';
 import { ShowOrdersComponent } from './admin/show-orders/show-orders.component';
 import { ShowProductsComponent } from './admin/show-products/show-products.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
     canActivate: [AdminPageGuard],
     children: [
       {path: 'admin/orders', component: ShowOrdersComponent},
+      {path: 'admin/orders/:id', component: OrderDetailsComponent},
       {path: 'admin/all-products', component: ShowProductsComponent},
       {path: 'admin/add-product', component: AddProductComponent},
       {path: 'admin/edit/:id', component: AddProductComponent},

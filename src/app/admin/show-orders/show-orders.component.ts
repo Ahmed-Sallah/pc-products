@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../admin.service';
+import { Order } from '../order.model';
 
 @Component({
   selector: 'app-show-orders',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowOrdersComponent implements OnInit {
 
-  constructor() { }
+  orders: any
+  search = ''
+
+  constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.adminService.getOrders().subscribe(response => {
+      this.orders = response
+    })
   }
 
 }

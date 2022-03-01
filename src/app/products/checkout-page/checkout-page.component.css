@@ -170,3 +170,15 @@ select {
   color: red;
   font-weight: 500;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input:-webkit-autofill {
+  box-shadow: 0 0 0 30px rgb(49, 47, 47) inset;
+}
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}

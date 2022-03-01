@@ -4,6 +4,7 @@ const router = express.Router()
 
 const Component = require('../models/product')
 const User = require('../models/user')
+const Order = require('../models/order')
 
 
 router.get('/admin/get-products', (req, res, next) => {
@@ -59,6 +60,28 @@ router.delete('/admin/delete-account/:accId', (req, res, next) => {
   User.deleteOne({_id: req.params.accId})
     .then(result => {
       res.status(200).json({title: 'Success', message: 'Successfully Deleted'})
+    })
+})
+
+router.get('/admin/get-orders', (req, res, next) => {
+  Order.find({}).populate('user')
+    .then(orders => {
+      res.status(200).json(orders)
+    })
+})
+
+router.get('/admin/get-order/:id', (req, res, next) => {
+  Order.findById(req.params.id).populate('user')
+    .then(order => {
+      console.log(order)
+      res.status(200).json(order)
+    })
+})
+
+router.delete('/admin/delete-order/:id', (req, res, next) => {
+  Order.findByIdAndDelete(req.params.id)
+    .then(result => {
+      res.status(200).json({message: 'Successfully Deleted'})
     })
 })
 

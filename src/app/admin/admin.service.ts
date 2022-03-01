@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 import { NotificationService } from "../Notification/notification.service";
 import { Product } from "../products/product.model";
 import { Account } from "./account.model";
+import { Order } from "./order.model";
 
 @Injectable({providedIn: 'root'})
 
@@ -64,8 +65,8 @@ export class AdminService {
 
   getAccounts() {
     this.http.get<{users: Account[]}>('http://localhost:3000/admin/get-accounts')
-      .subscribe(respnse => {
-        this.accounts = respnse.users
+      .subscribe(response => {
+        this.accounts = response.users
         this.accountsUpdated.next([...this.accounts])
       })
   }
@@ -80,6 +81,22 @@ export class AdminService {
         this.notify.showSuccess(response.title, response.message)
         this.accounts = this.accounts.filter(a => a._id !== accId)
         this.accountsUpdated.next([...this.accounts])
+      })
+  }
+
+  getOrders() {
+    return this.http.get<{orders: Order[]}>('http://localhost:3000/admin/get-orders')
+  }
+
+  getOrder(id: string) {
+    return this.http.get<{order: Order}>('http://localhost:3000/admin/get-order/' + id)
+  }
+
+  deleteOrder(orderId: string) {
+    this.http.delete<{order: Order}>('http://localhost:3000/admin/delete-order/' + orderId)
+      .subscribe(response => {
+        this.notify.showSuccess("Success", 'Order Completed')
+        this.router.navigate(['admin', 'orders'])
       })
   }
 }

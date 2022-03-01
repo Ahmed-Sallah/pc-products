@@ -7,7 +7,7 @@ const OrderSchema = new mongoose.Schema({
     street: {type: String, required: true},
   },
   orderDate: {type: Date, default: Date.now()},
-  items: [{name: String, brand: String, price: Number, quantity: Number}],
+  items: [{name: String, brand: String, price: Number, quantity: Number, image: String}],
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
 })
 
