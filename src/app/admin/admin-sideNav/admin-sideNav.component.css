@@ -25,11 +25,14 @@ ul li a:hover {
   color: rgb(168, 168, 168);
 }
 
+.toggle {
+  background-color: rgb(168, 168, 168);
+  border: none;
+  color: white;
+}
+
 @media (max-width: 1023px) {
   .mat-drawer {
     width: 36%;
-  }
-  .mat-drawer-content {
-    width: 70%;
   }
 }

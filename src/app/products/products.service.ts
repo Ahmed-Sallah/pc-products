@@ -49,7 +49,7 @@ export class ProductsService {
           filteredList.push(...this.products.filter(p => p.brand === b))
           this.filteredProducts.next(filteredList)
         } else {
-          filteredList.push(...this.products.filter(p => p.brand === b && p.price < form.controls['price'].value))
+          filteredList.push(...this.products.filter(p => p.brand === b && p.price <= form.controls['price'].value))
           this.filteredProducts.next(filteredList)
         }
 

@@ -51,3 +51,9 @@ td {
   outline: none;
   border-radius: 0.7em;
 }
+
+@media (max-width: 1023px) {
+  .search-input {
+    width: 100%;
+  }
+}

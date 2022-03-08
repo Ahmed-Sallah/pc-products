@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened
+  <mat-drawer mode="side" #drawer
     ><ul>
       <li>
         <a routerLink="/admin/orders"
@@ -28,5 +28,11 @@
       </li>
     </ul></mat-drawer
   >
-  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+
+  <mat-drawer-content>
+    <button type="button" mat-button class="toggle" (click)="drawer.toggle()">
+      <i class="fa-solid fa-arrow-right-long fa-2x" *ngIf="!drawer.opened"></i>
+      <i class="fa-solid fa-arrow-left fa-2x" *ngIf="drawer.opened"></i></button
+    ><router-outlet></router-outlet
+  ></mat-drawer-content>
 </mat-drawer-container>
